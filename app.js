@@ -349,8 +349,8 @@ function updateCartUI() {
     subtotal += cart[k].price * cart[k].qty;
   });
 
-  // Calculate 10% discount promo
-  const discount = Math.round(subtotal * 0.10);
+  // Calculate 5% discount promo
+  const discount = Math.round(subtotal * 0.05);
   const finalTotal = subtotal - discount;
 
   // Header & Mobile Badges
@@ -559,7 +559,7 @@ function submitOrderToZalo() {
     itemsText += `${idx + 1}. ${item.name} x${item.qty} (${formatMoney(itemTotal)})${item.note ? ` [${item.note}]` : ''}\n`;
   });
 
-  const discount = Math.round(subtotal * 0.10);
+  const discount = Math.round(subtotal * 0.05);
   const finalTotal = subtotal - discount;
 
   // Build structured Zalo order message
@@ -574,7 +574,7 @@ ${customerNote ? `📝 Ghi chú: ${customerNote}\n` : ''}
 ${itemsText}
 ---------------------------------------
 💵 Tạm tính: ${formatMoney(subtotal)}
-🎁 Ưu đãi đặt trước (-10%): -${formatMoney(discount)}
+🎁 Ưu đãi đặt trước (-5%): -${formatMoney(discount)}
 👉 TỔNG THANH TOÁN: ${formatMoney(finalTotal)}
 ---------------------------------------
 (Tiệm Chè Na Vũ Lăng, Ngũ Hiệp • Giao nóng 30 phút)`;
