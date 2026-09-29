@@ -868,18 +868,91 @@
         <div class="success-icon-wrap">
           <i class="fa-solid fa-circle-check"></i>
         </div>
-        <h3>Tạo Đơn Hàng Thành Công!</h3>
+        <div>
+          <h3>Đặt Món Thành Công!</h3>
+          <p class="success-header-desc">Cảm ơn bạn đã lựa chọn Tiệm Chè Na</p>
+        </div>
         <button class="btn-close-modal" onclick="closeOrderSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="modal-body">
+
+      <div class="modal-body success-body">
+        <!-- VIETQR BANKING PAYMENT SECTION -->
+        <div class="vietqr-payment-box">
+          <div class="vietqr-header">
+            <div class="vietqr-badge"><i class="fa-solid fa-qrcode"></i> THANH TOÁN CHUYỂN KHOẢN NHANH (VIETQR)</div>
+            <h4>Quét Mã QR Hoặc Chuyển Khoản Qua MB Bank</h4>
+            <p>Mở ứng dụng ngân hàng bất kỳ (MB, VCB, Techcom, BIDV, Momo...) quét mã để tự động điền số tiền & nội dung</p>
+          </div>
+
+          <div class="vietqr-content-grid">
+            <div class="qr-code-col">
+              <div class="qr-image-frame">
+                <img id="orderQrImage" src="https://img.vietqr.io/image/MB-83888181-compact2.png?amount=0&addInfo=TIEMCHENA&accountName=HO%20KINH%20DOANH%20TIEM%20CHE%20NA" alt="Mã QR Chuyển Khoản MB Bank Tiệm Chè Na" class="qr-img">
+                <span class="qr-scan-hint"><i class="fa-solid fa-camera"></i> Quét mã để thanh toán</span>
+              </div>
+            </div>
+
+            <div class="bank-details-col">
+              <div class="bank-info-card">
+                <div class="bank-row">
+                  <span class="b-label">Ngân hàng:</span>
+                  <strong class="b-value text-mb"><i class="fa-solid fa-building-columns"></i> MB Bank (Quân Đội)</strong>
+                </div>
+
+                <div class="bank-row">
+                  <span class="b-label">Số tài khoản:</span>
+                  <div class="b-copy-group">
+                    <strong class="b-value stk-highlight" id="stkDisplay">83888181</strong>
+                    <button type="button" class="btn-copy-mini" onclick="copyTextToClipboard('83888181', 'Đã sao chép Số tài khoản: 83888181')">
+                      <i class="fa-solid fa-copy"></i> Sao chép
+                    </button>
+                  </div>
+                </div>
+
+                <div class="bank-row">
+                  <span class="b-label">Chủ tài khoản:</span>
+                  <strong class="b-value">HỘ KINH DOANH TIỆM CHÈ NA</strong>
+                </div>
+
+                <div class="bank-row">
+                  <span class="b-label">Số tiền cần thanh toán:</span>
+                  <div class="b-copy-group">
+                    <strong class="b-value amount-highlight" id="qrAmountDisplay">0đ</strong>
+                    <button type="button" class="btn-copy-mini" onclick="copyTextToClipboard(document.getElementById('qrAmountValue').value, 'Đã sao chép số tiền')">
+                      <i class="fa-solid fa-copy"></i>
+                    </button>
+                    <input type="hidden" id="qrAmountValue" value="0">
+                  </div>
+                </div>
+
+                <div class="bank-row">
+                  <span class="b-label">Nội dung chuyển khoản:</span>
+                  <div class="b-copy-group">
+                    <strong class="b-value content-highlight" id="qrContentDisplay">TIEMCHENA</strong>
+                    <button type="button" class="btn-copy-mini" onclick="copyTextToClipboard(document.getElementById('qrContentDisplay').textContent, 'Đã sao chép nội dung chuyển khoản')">
+                      <i class="fa-solid fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="payment-method-note">
+                <i class="fa-solid fa-circle-info text-accent"></i>
+                <span>Bạn có thể <strong>chuyển khoản trước</strong> qua mã QR trên hoặc <strong>thanh toán tiền mặt (COD)</strong> cho shipper khi nhận chè!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Step Guide & Preview Details -->
         <div class="order-step-guide">
           <div class="step-item">
             <span class="step-num">1</span>
-            <p>Nội dung đơn hàng đã được <strong>tự động sao chép</strong> vào bộ nhớ tạm.</p>
+            <p>Nội dung đơn hàng đã được <strong>tự động sao chép</strong>.</p>
           </div>
           <div class="step-item">
             <span class="step-num">2</span>
-            <p>Bấm nút <strong>"Mở Zalo Gửi Đơn"</strong> bên dưới -> Dán (Paste) vào khung chat Zalo của Tiệm Na.</p>
+            <p>Bấm nút <strong>"Mở Zalo Gửi Đơn"</strong> để Tiệm Chè Na xác nhận và giao nóng giòn ngay!</p>
           </div>
         </div>
 
@@ -888,10 +961,11 @@
           <pre id="orderPreviewContent" class="order-preview-text"></pre>
         </div>
       </div>
+
       <div class="modal-footer success-footer">
         <button class="btn btn-outline" onclick="closeOrderSuccessModal()">Đóng</button>
-        <button class="btn btn-primary btn-copy-again" onclick="copyOrderAgain()">
-          <i class="fa-solid fa-copy"></i> Sao Chép Lại
+        <button class="btn btn-secondary btn-copy-again" onclick="copyOrderAgain()">
+          <i class="fa-solid fa-copy"></i> Sao Chép Lại Đơn
         </button>
         <a id="btnOpenZaloDirect" href="https://zalo.me/0986479285" target="_blank" rel="noopener noreferrer" class="btn btn-checkout-zalo">
           <i class="fa-solid fa-comments"></i> MỞ ZALO GỬI ĐƠN NGAY

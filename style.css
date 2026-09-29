@@ -2941,3 +2941,198 @@ button, input, textarea, select {
   font-size: 0.88rem;
   color: var(--text-muted, #64748b);
 }
+
+
+/* ==========================================================================
+   VIETQR PAYMENT MODAL STYLES
+   ========================================================================== */
+.order-success-dialog {
+  max-width: 680px;
+  width: 95%;
+}
+
+.success-header-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.vietqr-payment-box {
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.vietqr-header {
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.vietqr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 6px;
+}
+
+.vietqr-header h4 {
+  font-size: 1.15rem;
+  color: #0f172a;
+  margin: 4px 0;
+}
+
+.vietqr-header p {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.vietqr-content-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.qr-image-frame {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.qr-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+.qr-scan-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: #059669;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.bank-info-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.b-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.b-value {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.text-mb {
+  color: #0033a0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stk-highlight {
+  font-size: 1.05rem;
+  color: #0033a0;
+  letter-spacing: 1px;
+}
+
+.amount-highlight {
+  color: #dc2626;
+  font-size: 1.05rem;
+}
+
+.content-highlight {
+  color: #d97706;
+  font-size: 0.95rem;
+}
+
+.b-copy-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-copy-mini {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-copy-mini:hover {
+  background: #0033a0;
+  color: #ffffff;
+  border-color: #0033a0;
+}
+
+.payment-method-note {
+  margin-top: 12px;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #92400e;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .vietqr-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .qr-image-frame {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  .bank-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

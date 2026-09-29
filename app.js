@@ -1,3 +1,15 @@
+
+window.copyTextToClipboard = function(text, successMsg) {
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    if (typeof showToast === 'function') {
+      showToast(successMsg || 'Đã sao chép vào bộ nhớ tạm!');
+    } else {
+      alert(successMsg || 'Đã sao chép!');
+    }
+  });
+};
+
 /**
  * TIỆM CHÈ NA - APPLICATION LOGIC & STATE MANAGEMENT
  */
@@ -586,6 +598,20 @@ ${itemsText}
 
   // Close Cart Drawer
   closeCartDrawer();
+
+  // Update VietQR dynamic image and bank details
+  const qrImg = document.getElementById('orderQrImage');
+  const qrAmountDisplay = document.getElementById('qrAmountDisplay');
+  const qrAmountValue = document.getElementById('qrAmountValue');
+  const qrContentDisplay = document.getElementById('qrContentDisplay');
+  
+  const orderTransferContent = 'TIEMCHENA ' + (customerPhone ? customerPhone.replace(/\s+/g, '').slice(-4) : 'ONLINE');
+  const vietQrUrl = `https://img.vietqr.io/image/MB-83888181-compact2.png?amount=${finalTotal}&addInfo=${encodeURIComponent(orderTransferContent)}&accountName=${encodeURIComponent('HO KINH DOANH TIEM CHE NA')}`;
+  
+  if (qrImg) qrImg.src = vietQrUrl;
+  if (qrAmountDisplay) qrAmountDisplay.textContent = formatMoney(finalTotal);
+  if (qrAmountValue) qrAmountValue.value = finalTotal;
+  if (qrContentDisplay) qrContentDisplay.textContent = orderTransferContent;
 
   // Show Order Success Modal with preview
   const successModal = document.getElementById('orderSuccessModal');
