@@ -589,15 +589,8 @@ ${itemsText}
 🎁 Ưu đãi đặt trước (-5%): -${formatMoney(discount)}
 👉 TỔNG THANH TOÁN: ${formatMoney(finalTotal)}
 ---------------------------------------
+💳 THANH TOÁN: MB Bank (Quân Đội) - STK: 83888181 - HỘ KINH DOANH TIỆM CHÈ NA
 (Tiệm Chè Na Vũ Lăng, Ngũ Hiệp • Giao nóng 30 phút)`;
-
-  // Copy to clipboard
-  try {
-    navigator.clipboard.writeText(lastGeneratedZaloOrder);
-  } catch (err) {}
-
-  // Close Cart Drawer
-  closeCartDrawer();
 
   // Update VietQR dynamic image and bank details
   const qrImg = document.getElementById('orderQrImage');
@@ -605,7 +598,8 @@ ${itemsText}
   const qrAmountValue = document.getElementById('qrAmountValue');
   const qrContentDisplay = document.getElementById('qrContentDisplay');
   
-  const orderTransferContent = 'TIEMCHENA ' + (customerPhone ? customerPhone.replace(/\s+/g, '').slice(-4) : 'ONLINE');
+  const cleanPhone = customerPhone.replace(/\s+/g, '');
+  const orderTransferContent = 'TIEMCHENA ' + (cleanPhone ? cleanPhone.slice(-4) : 'ONLINE');
   const vietQrUrl = `https://img.vietqr.io/image/MB-83888181-compact2.png?amount=${finalTotal}&addInfo=${encodeURIComponent(orderTransferContent)}&accountName=${encodeURIComponent('HO KINH DOANH TIEM CHE NA')}`;
   
   if (qrImg) qrImg.src = vietQrUrl;
@@ -613,22 +607,34 @@ ${itemsText}
   if (qrAmountValue) qrAmountValue.value = finalTotal;
   if (qrContentDisplay) qrContentDisplay.textContent = orderTransferContent;
 
-  // Show Order Success Modal with preview
+  // Show Order Success Modal directly
   const successModal = document.getElementById('orderSuccessModal');
   const previewContent = document.getElementById('orderPreviewContent');
+  const btnZaloDirect = document.getElementById('btnOpenZaloDirect');
+
   if (previewContent) {
     previewContent.textContent = lastGeneratedZaloOrder;
   }
+
+  // Generate direct Zalo link
+  const zaloDirectUrl = `https://zalo.me/0986479285`;
+  if (btnZaloDirect) {
+    btnZaloDirect.href = zaloDirectUrl;
+  }
+
+  // Automatically open Zalo chat directly in new tab/app
+  window.open(zaloDirectUrl, '_blank');
+
   if (successModal) {
     successModal.classList.add('active');
   }
 
-  showToast('Đã sao chép đơn hàng! Đang mở Zalo Tiệm Na...');
-
-  // Open Zalo chat
-  setTimeout(() => {
-    window.open('https://zalo.me/0986479285', '_blank');
-  }, 1000);
+  // Clear cart after successful order
+  cart = {};
+  saveCart();
+  updateCartUI();
+  closeCartDrawer();
+  showToast('🎉 Đặt hàng thành công! Đơn đã được chuyển qua Zalo.');
 }
 
 function copyOrderAgain() {

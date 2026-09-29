@@ -870,25 +870,34 @@
         </div>
         <div>
           <h3>Đặt Món Thành Công!</h3>
-          <p class="success-header-desc">Cảm ơn bạn đã lựa chọn Tiệm Chè Na</p>
+          <p class="success-header-desc">Đơn hàng đã được tự động gửi đến Tiệm Chè Na</p>
         </div>
         <button class="btn-close-modal" onclick="closeOrderSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body success-body">
+        <!-- Direct Confirmation Notice -->
+        <div class="order-auto-notice">
+          <i class="fa-solid fa-paper-plane text-primary"></i>
+          <div>
+            <strong>Tiệm Chè Na đã tiếp nhận đơn hàng của bạn!</strong>
+            <p>Bếp đang chuẩn bị món ăn nóng giòn và sẽ liên hệ giao hàng tận nơi trong 20-30 phút.</p>
+          </div>
+        </div>
+
         <!-- VIETQR BANKING PAYMENT SECTION -->
         <div class="vietqr-payment-box">
           <div class="vietqr-header">
-            <div class="vietqr-badge"><i class="fa-solid fa-qrcode"></i> THANH TOÁN CHUYỂN KHOẢN NHANH (VIETQR)</div>
-            <h4>Quét Mã QR Hoặc Chuyển Khoản Qua MB Bank</h4>
-            <p>Mở ứng dụng ngân hàng bất kỳ (MB, VCB, Techcom, BIDV, Momo...) quét mã để tự động điền số tiền & nội dung</p>
+            <div class="vietqr-badge"><i class="fa-solid fa-qrcode"></i> THANH TOÁN CHUYỂN KHOẢN (VIETQR)</div>
+            <h4>Quét Mã QR MB Bank Để Thanh Toán Nhanh</h4>
+            <p>Mở ứng dụng ngân hàng bất kỳ (MB, VCB, Techcom, BIDV, Momo...) quét mã để thanh toán</p>
           </div>
 
           <div class="vietqr-content-grid">
             <div class="qr-code-col">
               <div class="qr-image-frame">
                 <img id="orderQrImage" src="https://img.vietqr.io/image/MB-83888181-compact2.png?amount=0&addInfo=TIEMCHENA&accountName=HO%20KINH%20DOANH%20TIEM%20CHE%20NA" alt="Mã QR Chuyển Khoản MB Bank Tiệm Chè Na" class="qr-img">
-                <span class="qr-scan-hint"><i class="fa-solid fa-camera"></i> Quét mã để thanh toán</span>
+                <span class="qr-scan-hint"><i class="fa-solid fa-camera"></i> Quét mã thanh toán</span>
               </div>
             </div>
 
@@ -918,23 +927,39 @@
                   <span class="b-label">Số tiền cần thanh toán:</span>
                   <div class="b-copy-group">
                     <strong class="b-value amount-highlight" id="qrAmountDisplay">0đ</strong>
-                    <button type="button" class="btn-copy-mini" onclick="copyTextToClipboard(document.getElementById('qrAmountValue').value, 'Đã sao chép số tiền')">
-                      <i class="fa-solid fa-copy"></i>
-                    </button>
                     <input type="hidden" id="qrAmountValue" value="0">
                   </div>
                 </div>
 
                 <div class="bank-row">
                   <span class="b-label">Nội dung chuyển khoản:</span>
-                  <div class="b-copy-group">
-                    <strong class="b-value content-highlight" id="qrContentDisplay">TIEMCHENA</strong>
-                    <button type="button" class="btn-copy-mini" onclick="copyTextToClipboard(document.getElementById('qrContentDisplay').textContent, 'Đã sao chép nội dung chuyển khoản')">
-                      <i class="fa-solid fa-copy"></i>
-                    </button>
-                  </div>
+                  <strong class="b-value content-highlight" id="qrContentDisplay">TIEMCHENA</strong>
                 </div>
               </div>
+
+              <div class="payment-method-note">
+                <i class="fa-solid fa-circle-info text-accent"></i>
+                <span>Bạn có thể <strong>chuyển khoản qua mã QR trên</strong> hoặc <strong>thanh toán tiền mặt (COD)</strong> khi nhận hàng!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Summary Box -->
+        <div class="order-preview-box">
+          <div class="preview-title"><i class="fa-solid fa-receipt"></i> Chi Tiết Đơn Hàng Vừa Đặt:</div>
+          <pre id="orderPreviewContent" class="order-preview-text"></pre>
+        </div>
+      </div>
+
+      <div class="modal-footer success-footer">
+        <button class="btn btn-outline" onclick="closeOrderSuccessModal()">Đóng</button>
+        <a id="btnOpenZaloDirect" href="https://zalo.me/0986479285" target="_blank" rel="noopener noreferrer" class="btn btn-checkout-zalo">
+          <i class="fa-solid fa-comments"></i> NHẮN TIN ZALO VỚI TIỆM
+        </a>
+      </div>
+    </div>
+  </div>
 
               <div class="payment-method-note">
                 <i class="fa-solid fa-circle-info text-accent"></i>

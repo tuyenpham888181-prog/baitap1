@@ -3136,3 +3136,33 @@ button, input, textarea, select {
     align-items: flex-start;
   }
 }
+
+
+.order-auto-notice {
+  background: #ecfdf5;
+  border: 1.5px solid #a7f3d0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.order-auto-notice i {
+  font-size: 1.8rem;
+  color: #059669;
+}
+
+.order-auto-notice strong {
+  display: block;
+  font-size: 0.98rem;
+  color: #065f46;
+  margin-bottom: 2px;
+}
+
+.order-auto-notice p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #047857;
+}
