@@ -676,8 +676,12 @@ function showToast(message, type = 'success') {
 
 
 // ==========================================================================
-// CUSTOMER REAL REVIEWS SYSTEM (tiemchena.life)
+
 // ==========================================================================
+// CUSTOMER REAL REVIEWS SYSTEM WITH REAL-TIME CLOUD SYNC (tiemchena.life)
+// ==========================================================================
+
+const CLOUD_STORAGE_ENDPOINT = "https://api.restful-api.dev/objects/ff808181a09d98f701a0ed9506ac42a7";
 
 const RATING_TEXTS_MAP = {
   1: "1 sao - Chưa hài lòng",
@@ -687,11 +691,69 @@ const RATING_TEXTS_MAP = {
   5: "5 sao - Cực kỳ ngon & hài lòng"
 };
 
-function initReviewsSystem() {
+let cachedReviewsList = [];
+
+async function initReviewsSystem() {
   initStarRatingWidget();
   initReviewFormToggle();
   initReviewFormSubmit();
+  
+  // 1. Load local cache first for instant display
+  loadLocalReviewsCache();
   renderRealReviews();
+  
+  // 2. Fetch fresh real reviews from Cloud Database
+  await fetchReviewsFromCloud();
+  
+  // 3. Auto-sync periodically (every 20s) so new reviews appear live
+  setInterval(fetchReviewsFromCloud, 20000);
+}
+
+function loadLocalReviewsCache() {
+  try {
+    cachedReviewsList = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+  } catch (e) {
+    cachedReviewsList = [];
+  }
+}
+
+async function fetchReviewsFromCloud() {
+  try {
+    const res = await fetch(CLOUD_STORAGE_ENDPOINT);
+    if (res.ok) {
+      const json = await res.json();
+      if (json && json.data && Array.isArray(json.data.reviews)) {
+        const cloudReviews = json.data.reviews;
+        
+        // Merge with any local offline reviews
+        const mergedMap = new Map();
+        [...cloudReviews, ...cachedReviewsList].forEach(r => {
+          if (r && r.id) mergedMap.set(String(r.id), r);
+        });
+        
+        cachedReviewsList = Array.from(mergedMap.values()).sort((a, b) => (b.id || 0) - (a.id || 0));
+        localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
+        renderRealReviews();
+      }
+    }
+  } catch (err) {
+    console.warn("Could not sync reviews from cloud, using local storage cache:", err);
+  }
+}
+
+async function syncReviewsToCloud(newList) {
+  try {
+    await fetch(CLOUD_STORAGE_ENDPOINT, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "tiemchena_reviews",
+        data: { reviews: newList }
+      })
+    });
+  } catch (err) {
+    console.error("Cloud sync error:", err);
+  }
 }
 
 function initStarRatingWidget() {
@@ -760,6 +822,16 @@ function initReviewFormToggle() {
   }
 }
 
+window.openAndScrollToReviewForm = function() {
+  const wrapper = document.getElementById("reviewFormWrapper");
+  if (wrapper) {
+    wrapper.classList.remove("hidden");
+    wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+    const nameInput = document.getElementById("reviewName");
+    if (nameInput) setTimeout(() => nameInput.focus(), 400);
+  }
+};
+
 function initReviewFormSubmit() {
   const form = document.getElementById("customerReviewForm");
   const successMsg = document.getElementById("reviewSuccessAlert");
@@ -767,7 +839,7 @@ function initReviewFormSubmit() {
 
   if (!form) return;
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const name = document.getElementById("reviewName").value.trim();
@@ -785,6 +857,12 @@ function initReviewFormSubmit() {
       return;
     }
 
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang đăng...';
+    }
+
     const newReview = {
       id: Date.now(),
       name: name,
@@ -796,14 +874,26 @@ function initReviewFormSubmit() {
       verified: true
     };
 
-    saveRealReview(newReview);
+    // Add to local state & storage immediately
+    cachedReviewsList.unshift(newReview);
+    localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
+    renderRealReviews();
 
+    // Sync to global cloud database so all devices see it
+    await syncReviewsToCloud(cachedReviewsList);
+
+    // Reset form
     form.reset();
     document.getElementById("selectedRatingValue").value = "5";
     const stars = document.querySelectorAll("#starsSelect i");
     stars.forEach(s => s.classList.add("active"));
     const label = document.getElementById("ratingTextLabel");
     if (label) label.textContent = RATING_TEXTS_MAP[5];
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Đăng Đánh Giá Thực Tế';
+    }
 
     if (successMsg) {
       successMsg.classList.remove("hidden");
@@ -814,25 +904,17 @@ function initReviewFormSubmit() {
     }
 
     if (typeof showToast === 'function') {
-      showToast("Đã gửi đánh giá thành công!");
+      showToast("Cảm ơn bạn! Đánh giá đã được xuất bản lên hệ thống.");
     }
-
-    renderRealReviews();
   });
 }
 
-function saveRealReview(review) {
-  let reviews = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
-  reviews.unshift(review);
-  localStorage.setItem("tiemchena_real_reviews", JSON.stringify(reviews));
-}
-
-window.deleteRealReview = function(id) {
-  if (confirm("Bạn có chắc muốn xóa đánh giá này?")) {
-    let reviews = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
-    reviews = reviews.filter(r => r.id !== id);
-    localStorage.setItem("tiemchena_real_reviews", JSON.stringify(reviews));
+window.deleteRealReview = async function(id) {
+  if (confirm("Bạn có chắc muốn xóa đánh giá này khỏi hệ thống?")) {
+    cachedReviewsList = cachedReviewsList.filter(r => r.id !== id);
+    localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
     renderRealReviews();
+    await syncReviewsToCloud(cachedReviewsList);
   }
 };
 
@@ -861,7 +943,7 @@ function renderRealReviews() {
 
   if (!grid) return;
 
-  let reviews = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+  const reviews = cachedReviewsList || [];
 
   if (reviews.length === 0) {
     if (scoreEl) scoreEl.textContent = "5.0";
@@ -875,7 +957,7 @@ function renderRealReviews() {
         <div class="empty-reviews-icon"><i class="fa-regular fa-comment-dots"></i></div>
         <h4>Chưa có đánh giá nào từ khách hàng</h4>
         <p>Bạn đã thưởng thức nem nướng, chè xoài caramen hay các món ăn vặt tại Tiệm Chè Na? Hãy là người đầu tiên chia sẻ cảm nhận chân thực nhé!</p>
-        <button class="btn btn-primary" onclick="document.getElementById('btnToggleReviewForm').click()">
+        <button class="btn btn-primary" onclick="openAndScrollToReviewForm()">
           <i class="fa-solid fa-pen-to-square"></i> Viết Đánh Giá Ngay
         </button>
       </div>
@@ -931,14 +1013,3 @@ function renderRealReviews() {
     `;
   }).join('');
 }
-
-
-window.openAndScrollToReviewForm = function() {
-  const wrapper = document.getElementById("reviewFormWrapper");
-  if (wrapper) {
-    wrapper.classList.remove("hidden");
-    wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
-    const nameInput = document.getElementById("reviewName");
-    if (nameInput) setTimeout(() => nameInput.focus(), 400);
-  }
-};
