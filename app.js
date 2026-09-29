@@ -1,4 +1,15 @@
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
 window.copyTextToClipboard = function(text, successMsg) {
   if (!text) return;
   navigator.clipboard.writeText(text).then(() => {
@@ -540,7 +551,11 @@ let lastGeneratedZaloOrder = "";
 function submitOrderToZalo() {
   const keys = Object.keys(cart);
   if (keys.length === 0) {
-    showToast('Giỏ hàng của bạn đang trống!', 'warning');
+    if (typeof showToast === 'function') {
+      showToast('Giỏ hàng của bạn đang trống! Hãy chọn món nhé.', 'warning');
+    } else {
+      alert('Giỏ hàng của bạn đang trống!');
+    }
     return;
   }
 
@@ -555,7 +570,11 @@ function submitOrderToZalo() {
   const customerNote = noteInput ? noteInput.value.trim() : '';
 
   if (!customerPhone || !customerAddress) {
-    showToast('Vui lòng điền Số điện thoại & Địa chỉ nhận hàng!', 'warning');
+    if (typeof showToast === 'function') {
+      showToast('Vui lòng điền Số điện thoại & Địa chỉ nhận hàng!', 'warning');
+    } else {
+      alert('Vui lòng điền Số điện thoại & Địa chỉ nhận hàng!');
+    }
     if (!customerPhone && phoneInput) phoneInput.focus();
     else if (!customerAddress && addressInput) addressInput.focus();
     return;
@@ -563,32 +582,57 @@ function submitOrderToZalo() {
 
   let subtotal = 0;
   let itemsHtml = '';
-  let itemsText = '';
+  let itemsZaloText = '';
 
   keys.forEach((k, idx) => {
     const item = cart[k];
-    const itemTotal = item.price * item.qty;
+    if (!item) return;
+    const itemTotal = (item.price || 0) * (item.qty || 1);
     subtotal += itemTotal;
     
     itemsHtml += `
       <tr>
         <td class="item-name-cell">
-          ${escapeHtml(item.name)}
+          <strong>${escapeHtml(item.name || 'Món ăn')}</strong>
           ${item.note ? `<span class="item-note-sub"><i class="fa-solid fa-tag"></i> ${escapeHtml(item.note)}</span>` : ''}
         </td>
-        <td class="text-center font-bold">x${item.qty}</td>
-        <td class="text-right">${formatMoney(item.price)}</td>
+        <td class="text-center font-bold">x${item.qty || 1}</td>
+        <td class="text-right">${formatMoney(item.price || 0)}</td>
         <td class="text-right font-bold">${formatMoney(itemTotal)}</td>
       </tr>
     `;
 
-    itemsText += `${idx + 1}. ${item.name} x${item.qty} (${formatMoney(itemTotal)})${item.note ? ` [${item.note}]` : ''}\n`;
+    itemsZaloText += `${idx + 1}. ${item.name} x${item.qty} (${formatMoney(itemTotal)})${item.note ? ` [${item.note}]` : ''}\n`;
   });
 
   const discount = Math.round(subtotal * 0.05);
   const finalTotal = subtotal - discount;
   const orderCode = '#TCN-' + Math.floor(1000 + Math.random() * 9000);
   const orderTime = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) + ' ' + new Date().toLocaleDateString('vi-VN');
+
+  // Build structured Zalo order message
+  lastGeneratedZaloOrder = 
+`🍲 ĐƠN HÀNG TỪ WEBSITE TIỆM CHÈ NA 🍲
+---------------------------------------
+🔖 Mã đơn: ${orderCode} (${orderTime})
+👤 Khách hàng: ${customerName || 'Khách đặt online'}
+📞 Điện thoại: ${customerPhone}
+📍 Địa chỉ: ${customerAddress}
+${customerNote ? `📝 Ghi chú: ${customerNote}\n` : ''}
+📋 DANH SÁCH MÓN:
+${itemsZaloText}
+---------------------------------------
+💵 Tạm tính: ${formatMoney(subtotal)}
+🎁 Ưu đãi đặt trước (-5%): -${formatMoney(discount)}
+👉 TỔNG THANH TOÁN: ${formatMoney(finalTotal)}
+---------------------------------------
+💳 MB Bank (Quân Đội) - STK: 83888181 - HỘ KINH DOANH TIỆM CHÈ NA
+(Tiệm Chè Na Vũ Lăng, Ngũ Hiệp • Giao nhanh 30 phút)`;
+
+  // Auto copy to clipboard for immediate convenience
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(lastGeneratedZaloOrder).catch(() => {});
+  }
 
   // 1. POPULATE INVOICE (HÓA ĐƠN ĐIỆN TỬ)
   const invCode = document.getElementById('invOrderCode');
@@ -638,18 +682,35 @@ function submitOrderToZalo() {
   if (qrAmountValue) qrAmountValue.value = finalTotal;
   if (qrContentDisplay) qrContentDisplay.textContent = orderTransferContent;
 
-  // 3. SHOW ORDER INVOICE MODAL
+  // 3. SET ZALO DIRECT LINK
+  const btnZalo = document.getElementById('btnOpenZaloDirect');
+  if (btnZalo) {
+    btnZalo.href = 'https://zalo.me/0986479285';
+    btnZalo.onclick = function() {
+      if (lastGeneratedZaloOrder && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(lastGeneratedZaloOrder).then(() => {
+          if (typeof showToast === 'function') showToast('Đã sao chép đơn! Bạn chỉ cần gửi tin nhắn trên Zalo.');
+        });
+      }
+    };
+  }
+
+  // 4. CLOSE CART & OPEN INVOICE MODAL
+  closeCartDrawer();
+
   const successModal = document.getElementById('orderSuccessModal');
   if (successModal) {
     successModal.classList.add('active');
   }
 
-  // Clear cart and show notification
+  // Reset cart
   cart = {};
   saveCart();
   updateCartUI();
-  closeCartDrawer();
-  showToast('🎉 Đặt hàng thành công! Hóa đơn đã sẵn sàng.');
+
+  if (typeof showToast === 'function') {
+    showToast('🎉 Đặt hàng thành công! Hóa đơn đã hiển thị.');
+  }
 }
 
 function copyOrderAgain() {
