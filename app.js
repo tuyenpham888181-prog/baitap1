@@ -522,6 +522,8 @@ function handleCustomizeBackdropClick(e) {
 // CHECKOUT & ZALO ORDER CREATOR
 // ==========================================================================
 
+let lastGeneratedZaloOrder = "";
+
 function submitOrderToZalo() {
   const keys = Object.keys(cart);
   if (keys.length === 0) {
@@ -560,7 +562,7 @@ function submitOrderToZalo() {
   const finalTotal = subtotal - discount;
 
   // Build structured Zalo order message
-  const zaloMessage = 
+  lastGeneratedZaloOrder = 
 `🍲 ĐƠN HÀNG TỪ WEBSITE TIỆM CHÈ NA 🍲
 ---------------------------------------
 👤 Khách hàng: ${customerName || 'Khách đặt online'}
@@ -578,17 +580,52 @@ ${itemsText}
 
   // Copy to clipboard
   try {
-    navigator.clipboard.writeText(zaloMessage);
-    showToast('Đã sao chép nội dung đơn hàng! Đang chuyển sang Zalo...');
-  } catch (err) {
-    showToast('Đang kết nối đến Zalo Tiệm Chè Na...');
+    navigator.clipboard.writeText(lastGeneratedZaloOrder);
+  } catch (err) {}
+
+  // Close Cart Drawer
+  closeCartDrawer();
+
+  // Show Order Success Modal with preview
+  const successModal = document.getElementById('orderSuccessModal');
+  const previewContent = document.getElementById('orderPreviewContent');
+  if (previewContent) {
+    previewContent.textContent = lastGeneratedZaloOrder;
+  }
+  if (successModal) {
+    successModal.classList.add('active');
   }
 
-  // Redirect to shop Zalo
+  showToast('Đã sao chép đơn hàng! Đang mở Zalo Tiệm Na...');
+
+  // Open Zalo chat
   setTimeout(() => {
-    window.location.href = 'https://zalo.me/0986479285';
-  }, 800);
+    window.open('https://zalo.me/0986479285', '_blank');
+  }, 1000);
 }
+
+function copyOrderAgain() {
+  if (lastGeneratedZaloOrder) {
+    try {
+      navigator.clipboard.writeText(lastGeneratedZaloOrder);
+      showToast('Đã sao chép lại đơn hàng!');
+    } catch (e) {
+      showToast('Không thể sao chép tự động.', 'warning');
+    }
+  }
+}
+
+function closeOrderSuccessModal() {
+  const modal = document.getElementById('orderSuccessModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function handleOrderSuccessBackdropClick(e) {
+  if (e.target.id === 'orderSuccessModal') {
+    closeOrderSuccessModal();
+  }
+}
+
 
 // ==========================================================================
 // LIGHTBOX MODAL

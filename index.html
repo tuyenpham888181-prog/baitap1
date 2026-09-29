@@ -809,6 +809,45 @@
     </div>
   </div>
 
+  <!-- Order Success & Zalo Prompt Modal -->
+  <div class="modal-backdrop" id="orderSuccessModal" onclick="handleOrderSuccessBackdropClick(event)">
+    <div class="modal-dialog order-success-dialog">
+      <div class="modal-header success-header">
+        <div class="success-icon-wrap">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3>Tạo Đơn Hàng Thành Công!</h3>
+        <button class="btn-close-modal" onclick="closeOrderSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="order-step-guide">
+          <div class="step-item">
+            <span class="step-num">1</span>
+            <p>Nội dung đơn hàng đã được <strong>tự động sao chép</strong> vào bộ nhớ tạm.</p>
+          </div>
+          <div class="step-item">
+            <span class="step-num">2</span>
+            <p>Bấm nút <strong>"Mở Zalo Gửi Đơn"</strong> bên dưới -> Dán (Paste) vào khung chat Zalo của Tiệm Na.</p>
+          </div>
+        </div>
+
+        <div class="order-preview-box">
+          <div class="preview-title"><i class="fa-solid fa-receipt"></i> Chi Tiết Đơn Hàng Của Bạn:</div>
+          <pre id="orderPreviewContent" class="order-preview-text"></pre>
+        </div>
+      </div>
+      <div class="modal-footer success-footer">
+        <button class="btn btn-outline" onclick="closeOrderSuccessModal()">Đóng</button>
+        <button class="btn btn-primary btn-copy-again" onclick="copyOrderAgain()">
+          <i class="fa-solid fa-copy"></i> Sao Chép Lại
+        </button>
+        <a id="btnOpenZaloDirect" href="https://zalo.me/0986479285" target="_blank" rel="noopener noreferrer" class="btn btn-checkout-zalo">
+          <i class="fa-solid fa-comments"></i> MỞ ZALO GỬI ĐƠN NGAY
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Item Customize Modal -->
   <div class="modal-backdrop" id="customizeModalBackdrop" onclick="handleCustomizeBackdropClick(event)">
     <div class="modal-dialog">
