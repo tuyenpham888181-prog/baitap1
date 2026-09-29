@@ -561,61 +561,105 @@
     <div class="container">
       <div class="section-header text-center">
         <span class="section-tag"><i class="fa-solid fa-comment-dots"></i> FEEDBACK CHÂN THẬT</span>
-        <h2 class="section-title">Khách Hàng Thanh Trì Nói Gì Về Tiệm Chè Na?</h2>
-        <p class="section-subtitle">Hơn 5.000+ bữa ăn ngon đã được giao đến tận tay bà con khu vực Ngũ Hiệp, Tứ Hiệp, Văn Điển!</p>
+        <h2 class="section-title">Khách Hàng Nói Gì Về Tiệm Chè Na?</h2>
+        <p class="section-subtitle">100% cảm nhận và đánh giá thực tế từ khách hàng đã trải nghiệm</p>
       </div>
 
-      <div class="reviews-grid">
-        <!-- Review 1 -->
-        <div class="review-card">
-          <div class="review-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="review-text">
-            "Nem nướng 35k ở đây suất đầy đặn bất ngờ! Cuốn bánh tráng kèm dưa chuột, ram giòn và nước chấm sền sệt béo bùi chuẩn vị Nha Trang luôn. Ship qua Ngũ Hiệp chưa đầy 20 phút mà đồ vẫn nóng giòn rụm."
-          </p>
-          <div class="reviewer-meta">
-            <div class="reviewer-avatar">LN</div>
-            <div class="reviewer-info">
-              <strong>Lê Ngọc</strong>
-              <small><i class="fa-solid fa-location-dot"></i> Cư dân Vũ Lăng, Ngũ Hiệp</small>
+      <!-- Reviews Summary & Action Bar -->
+      <div class="reviews-summary-bar">
+        <div class="rating-overview">
+          <div class="rating-big-score" id="avgRatingScore">5.0</div>
+          <div class="rating-stars-group">
+            <div class="stars-display" id="avgRatingStars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
+            <span class="rating-total-count" id="totalReviewsCount">0 đánh giá thực tế</span>
           </div>
         </div>
+        <button class="btn btn-primary btn-write-review" id="btnToggleReviewForm">
+          <i class="fa-solid fa-pen-to-square"></i> Viết Đánh Giá Của Bạn
+        </button>
+      </div>
 
-        <!-- Review 2 -->
-        <div class="review-card">
-          <div class="review-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="review-text">
-            "Nghiện món Chè Xoài Caramen 30k và Chân gà sốt Thái của quán! Caramen mềm mướt không rỗ, xoài ngọt lịm quyện cốt dừa ngậy ngậy. Buổi chiều làm cốc chè kèm đĩa mỳ trộn 35k là no căng bụng làm việc đến tối."
-          </p>
-          <div class="reviewer-meta">
-            <div class="reviewer-avatar">HM</div>
-            <div class="reviewer-info">
-              <strong>Hoàng Minh</strong>
-              <small><i class="fa-solid fa-location-dot"></i> Văn phòng KĐT Tứ Hiệp, Thanh Trì</small>
+      <!-- Review Form Box (Collapsible / Toggleable) -->
+      <div class="review-form-wrapper hidden" id="reviewFormWrapper">
+        <div class="review-form-card">
+          <div class="review-form-header">
+            <div>
+              <h3><i class="fa-solid fa-feather-pointed text-primary"></i> Gửi Cảm Nhận Của Bạn</h3>
+              <p>Chia sẻ trải nghiệm thưởng thức nem nướng, chè xoài caramen & các món ăn vặt tại Tiệm Chè Na</p>
             </div>
+            <button type="button" class="btn-close-review-form" id="btnCloseReviewForm" title="Đóng form">&times;</button>
           </div>
-        </div>
 
-        <!-- Review 3 -->
-        <div class="review-card">
-          <div class="review-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="review-text">
-            "Mấy đứa con nhà mình mê tít bánh mì chảo, mẹt nem lụi và trà sữa 25k ở Tiệm Chè Na. Đóng gói rất sạch sẽ, hộp giấy vệ sinh, chị chủ quán thân thiện lại còn giảm 10% khi nhắn Zalo đặt trước nữa. Sẽ ủng hộ dài dài!"
-          </p>
-          <div class="reviewer-meta">
-            <div class="reviewer-avatar">TT</div>
-            <div class="reviewer-info">
-              <strong>Chị Thu Thủy</strong>
-              <small><i class="fa-solid fa-location-dot"></i> Ngũ Hiệp, Thanh Trì</small>
+          <form id="customerReviewForm" class="customer-review-form">
+            <!-- Star Rating Picker -->
+            <div class="form-group rating-picker-group">
+              <label>Độ hài lòng & đánh giá của bạn <span class="req">*</span></label>
+              <div class="star-rating-widget" id="starRatingWidget">
+                <div class="stars-select" id="starsSelect">
+                  <i class="fa-solid fa-star active" data-rating="1"></i>
+                  <i class="fa-solid fa-star active" data-rating="2"></i>
+                  <i class="fa-solid fa-star active" data-rating="3"></i>
+                  <i class="fa-solid fa-star active" data-rating="4"></i>
+                  <i class="fa-solid fa-star active" data-rating="5"></i>
+                </div>
+                <span class="rating-label" id="ratingTextLabel">5 sao - Cực kỳ ngon & hài lòng</span>
+                <input type="hidden" id="selectedRatingValue" value="5">
+              </div>
+            </div>
+
+            <div class="form-row-2col">
+              <div class="form-group">
+                <label for="reviewName"><i class="fa-solid fa-user"></i> Họ tên của bạn <span class="req">*</span></label>
+                <input type="text" id="reviewName" required placeholder="Ví dụ: Hoàng Yến, Anh Minh..." class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label for="reviewLocation"><i class="fa-solid fa-location-dot"></i> Nơi ở / Danh xưng</label>
+                <input type="text" id="reviewLocation" placeholder="Ví dụ: Cư dân Vũ Lăng, Ngũ Hiệp, Thanh Trì..." class="form-input">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reviewDish"><i class="fa-solid fa-bowl-food"></i> Món bạn đã thưởng thức</label>
+              <select id="reviewDish" class="form-select">
+                <option value="Nem Nướng Nha Trang Đặc Biệt">Nem Nướng Nha Trang Đặc Biệt</option>
+                <option value="Chè Xoài Caramen Núng Nính">Chè Xoài Caramen Núng Nính</option>
+                <option value="Mỳ Trộn Sốt Cay Đậm Đà">Mỳ Trộn Sốt Cay Đậm Đà</option>
+                <option value="Chân Gà Sốt Thái Xoài Cóc">Chân Gà Sốt Thái Xoài Cóc</option>
+                <option value="Mỳ Cay 7 Cấp Độ Hải Sản/Bò">Mỳ Cay 7 Cấp Độ Hải Sản/Bò</option>
+                <option value="Trà Sữa Trân Châu Đường Đen">Trà Sữa Trân Châu Đường Đen</option>
+                <option value="Combo nhiều món tại tiệm">Combo nhiều món tại tiệm</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="reviewComment"><i class="fa-solid fa-comment-dots"></i> Cảm nhận & đánh giá thực tế <span class="req">*</span></label>
+              <textarea id="reviewComment" rows="3" required placeholder="Chia sẻ hương vị món ăn (nước chấm, độ giòn, độ ngọt béo), thái độ phục vụ hoặc thời gian giao ship..." class="form-input"></textarea>
+            </div>
+
+            <div class="review-form-actions">
+              <button type="submit" class="btn btn-primary btn-submit-review">
+                <i class="fa-solid fa-paper-plane"></i> Đăng Đánh Giá Thực Tế
+              </button>
+              <button type="button" class="btn btn-outline" id="btnCancelReview">Hủy</button>
+            </div>
+          </form>
+
+          <div id="reviewSuccessAlert" class="review-success-alert hidden">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+              <strong>Cảm ơn bạn đã gửi đánh giá!</strong>
+              <span>Đánh giá thực tế của bạn đã được ghi nhận và hiển thị ngay bên dưới.</span>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Real Dynamic Reviews Grid -->
+      <div class="reviews-grid" id="reviewsGrid">
+        <!-- Rendered via JS -->
       </div>
     </div>
   </section>

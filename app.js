@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderMenu();
   updateCartUI();
   initStoreHours();
+  initReviewsSystem();
 });
 
 // Format VND Money
@@ -671,4 +672,262 @@ function showToast(message, type = 'success') {
     toast.style.transition = 'all 0.3s ease';
     setTimeout(() => toast.remove(), 300);
   }, 2800);
+}
+
+
+// ==========================================================================
+// CUSTOMER REAL REVIEWS SYSTEM (tiemchena.life)
+// ==========================================================================
+
+const RATING_TEXTS_MAP = {
+  1: "1 sao - Chưa hài lòng",
+  2: "2 sao - Cần cải thiện thêm",
+  3: "3 sao - Khá ổn, vừa miệng",
+  4: "4 sao - Rất ngon & chất lượng",
+  5: "5 sao - Cực kỳ ngon & hài lòng"
+};
+
+function initReviewsSystem() {
+  initStarRatingWidget();
+  initReviewFormToggle();
+  initReviewFormSubmit();
+  renderRealReviews();
+}
+
+function initStarRatingWidget() {
+  const starContainer = document.getElementById("starsSelect");
+  const label = document.getElementById("ratingTextLabel");
+  const input = document.getElementById("selectedRatingValue");
+  if (!starContainer || !input) return;
+
+  const stars = starContainer.querySelectorAll("i");
+
+  function updateStars(val) {
+    stars.forEach(star => {
+      const r = parseInt(star.getAttribute("data-rating"));
+      if (r <= val) {
+        star.classList.add("active");
+      } else {
+        star.classList.remove("active");
+      }
+    });
+    if (label && RATING_TEXTS_MAP[val]) {
+      label.textContent = RATING_TEXTS_MAP[val];
+    }
+  }
+
+  stars.forEach(star => {
+    star.addEventListener("mouseenter", () => {
+      const hoverVal = parseInt(star.getAttribute("data-rating"));
+      updateStars(hoverVal);
+    });
+
+    star.addEventListener("click", () => {
+      const currentVal = parseInt(star.getAttribute("data-rating"));
+      input.value = currentVal;
+      updateStars(currentVal);
+    });
+  });
+
+  starContainer.addEventListener("mouseleave", () => {
+    const savedVal = parseInt(input.value) || 5;
+    updateStars(savedVal);
+  });
+}
+
+function initReviewFormToggle() {
+  const toggleBtn = document.getElementById("btnToggleReviewForm");
+  const wrapper = document.getElementById("reviewFormWrapper");
+  const closeBtn = document.getElementById("btnCloseReviewForm");
+  const cancelBtn = document.getElementById("btnCancelReview");
+
+  if (toggleBtn && wrapper) {
+    toggleBtn.addEventListener("click", () => {
+      wrapper.classList.toggle("hidden");
+      if (!wrapper.classList.contains("hidden")) {
+        const nameInput = document.getElementById("reviewName");
+        if (nameInput) nameInput.focus();
+      }
+    });
+  }
+
+  if (closeBtn && wrapper) {
+    closeBtn.addEventListener("click", () => wrapper.classList.add("hidden"));
+  }
+
+  if (cancelBtn && wrapper) {
+    cancelBtn.addEventListener("click", () => wrapper.classList.add("hidden"));
+  }
+}
+
+function initReviewFormSubmit() {
+  const form = document.getElementById("customerReviewForm");
+  const successMsg = document.getElementById("reviewSuccessAlert");
+  const wrapper = document.getElementById("reviewFormWrapper");
+
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("reviewName").value.trim();
+    const location = document.getElementById("reviewLocation").value.trim();
+    const dish = document.getElementById("reviewDish").value;
+    const rating = parseInt(document.getElementById("selectedRatingValue").value) || 5;
+    const comment = document.getElementById("reviewComment").value.trim();
+
+    if (!name || !comment) {
+      if (typeof showToast === 'function') {
+        showToast("Vui lòng nhập tên và nội dung cảm nhận của bạn.", "warning");
+      } else {
+        alert("Vui lòng nhập tên và nội dung cảm nhận của bạn.");
+      }
+      return;
+    }
+
+    const newReview = {
+      id: Date.now(),
+      name: name,
+      location: location || "Khách hàng thực tế",
+      dish: dish,
+      rating: rating,
+      comment: comment,
+      date: new Date().toLocaleDateString('vi-VN'),
+      verified: true
+    };
+
+    saveRealReview(newReview);
+
+    form.reset();
+    document.getElementById("selectedRatingValue").value = "5";
+    const stars = document.querySelectorAll("#starsSelect i");
+    stars.forEach(s => s.classList.add("active"));
+    const label = document.getElementById("ratingTextLabel");
+    if (label) label.textContent = RATING_TEXTS_MAP[5];
+
+    if (successMsg) {
+      successMsg.classList.remove("hidden");
+      setTimeout(() => {
+        successMsg.classList.add("hidden");
+        if (wrapper) wrapper.classList.add("hidden");
+      }, 3000);
+    }
+
+    if (typeof showToast === 'function') {
+      showToast("Đã gửi đánh giá thành công!");
+    }
+
+    renderRealReviews();
+  });
+}
+
+function saveRealReview(review) {
+  let reviews = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+  reviews.unshift(review);
+  localStorage.setItem("tiemchena_real_reviews", JSON.stringify(reviews));
+}
+
+window.deleteRealReview = function(id) {
+  if (confirm("Bạn có chắc muốn xóa đánh giá này?")) {
+    let reviews = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+    reviews = reviews.filter(r => r.id !== id);
+    localStorage.setItem("tiemchena_real_reviews", JSON.stringify(reviews));
+    renderRealReviews();
+  }
+};
+
+function getCustomerInitials(name) {
+  if (!name) return "KH";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function sanitizeHtmlStr(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function renderRealReviews() {
+  const grid = document.getElementById("reviewsGrid");
+  const scoreEl = document.getElementById("avgRatingScore");
+  const starsEl = document.getElementById("avgRatingStars");
+  const countEl = document.getElementById("totalReviewsCount");
+
+  if (!grid) return;
+
+  let reviews = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+
+  if (reviews.length === 0) {
+    if (scoreEl) scoreEl.textContent = "5.0";
+    if (starsEl) {
+      starsEl.innerHTML = '<i class="fa-solid fa-star"></i>'.repeat(5);
+    }
+    if (countEl) countEl.textContent = "0 đánh giá thực tế";
+
+    grid.innerHTML = `
+      <div class="empty-reviews-card">
+        <div class="empty-reviews-icon"><i class="fa-regular fa-comment-dots"></i></div>
+        <h4>Chưa có đánh giá nào từ khách hàng</h4>
+        <p>Bạn đã thưởng thức nem nướng, chè xoài caramen hay các món ăn vặt tại Tiệm Chè Na? Hãy là người đầu tiên chia sẻ cảm nhận chân thực nhé!</p>
+        <button class="btn btn-primary" onclick="document.getElementById('btnToggleReviewForm').click()">
+          <i class="fa-solid fa-pen-to-square"></i> Viết Đánh Giá Ngay
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  const totalRating = reviews.reduce((sum, r) => sum + (r.rating || 5), 0);
+  const avgScore = (totalRating / reviews.length).toFixed(1);
+
+  if (scoreEl) scoreEl.textContent = avgScore;
+  if (countEl) countEl.textContent = `${reviews.length} đánh giá thực tế`;
+
+  if (starsEl) {
+    const rounded = Math.round(avgScore);
+    starsEl.innerHTML = '<i class="fa-solid fa-star"></i>'.repeat(rounded) + '<i class="fa-regular fa-star"></i>'.repeat(Math.max(0, 5 - rounded));
+  }
+
+  grid.innerHTML = reviews.map(r => {
+    const starCount = r.rating || 5;
+    const starHtml = '<i class="fa-solid fa-star"></i>'.repeat(starCount) + '<i class="fa-regular fa-star"></i>'.repeat(5 - starCount);
+    const initials = getCustomerInitials(r.name);
+
+    return `
+      <div class="review-card">
+        <div class="review-card-top">
+          <div class="review-stars">${starHtml}</div>
+          <span class="review-date">${r.date || "Gần đây"}</span>
+        </div>
+
+        <div>
+          <span class="review-dish-tag"><i class="fa-solid fa-bowl-food"></i> ${sanitizeHtmlStr(r.dish)}</span>
+        </div>
+
+        <p class="review-text">"${sanitizeHtmlStr(r.comment)}"</p>
+
+        <div class="reviewer-meta" style="justify-content: space-between; width: 100%;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="reviewer-avatar">${initials}</div>
+            <div class="reviewer-info">
+              <strong>
+                ${sanitizeHtmlStr(r.name)}
+                <span class="verified-badge"><i class="fa-solid fa-circle-check"></i> Đã trải nghiệm</span>
+              </strong>
+              <small><i class="fa-solid fa-location-dot"></i> ${sanitizeHtmlStr(r.location || "Khách hàng")}</small>
+            </div>
+          </div>
+          <button class="review-action-btn" title="Xóa đánh giá này" onclick="deleteRealReview(${r.id})">
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
