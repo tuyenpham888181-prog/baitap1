@@ -562,37 +562,68 @@ function submitOrderToZalo() {
   }
 
   let subtotal = 0;
+  let itemsHtml = '';
   let itemsText = '';
 
   keys.forEach((k, idx) => {
     const item = cart[k];
     const itemTotal = item.price * item.qty;
     subtotal += itemTotal;
+    
+    itemsHtml += `
+      <tr>
+        <td class="item-name-cell">
+          ${escapeHtml(item.name)}
+          ${item.note ? `<span class="item-note-sub"><i class="fa-solid fa-tag"></i> ${escapeHtml(item.note)}</span>` : ''}
+        </td>
+        <td class="text-center font-bold">x${item.qty}</td>
+        <td class="text-right">${formatMoney(item.price)}</td>
+        <td class="text-right font-bold">${formatMoney(itemTotal)}</td>
+      </tr>
+    `;
+
     itemsText += `${idx + 1}. ${item.name} x${item.qty} (${formatMoney(itemTotal)})${item.note ? ` [${item.note}]` : ''}\n`;
   });
 
   const discount = Math.round(subtotal * 0.05);
   const finalTotal = subtotal - discount;
+  const orderCode = '#TCN-' + Math.floor(1000 + Math.random() * 9000);
+  const orderTime = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) + ' ' + new Date().toLocaleDateString('vi-VN');
 
-  // Build structured Zalo order message
-  lastGeneratedZaloOrder = 
-`🍲 ĐƠN HÀNG TỪ WEBSITE TIỆM CHÈ NA 🍲
----------------------------------------
-👤 Khách hàng: ${customerName || 'Khách đặt online'}
-📞 Điện thoại: ${customerPhone}
-📍 Địa chỉ: ${customerAddress}
-${customerNote ? `📝 Ghi chú: ${customerNote}\n` : ''}
-📋 DANH SÁCH MÓN:
-${itemsText}
----------------------------------------
-💵 Tạm tính: ${formatMoney(subtotal)}
-🎁 Ưu đãi đặt trước (-5%): -${formatMoney(discount)}
-👉 TỔNG THANH TOÁN: ${formatMoney(finalTotal)}
----------------------------------------
-💳 THANH TOÁN: MB Bank (Quân Đội) - STK: 83888181 - HỘ KINH DOANH TIỆM CHÈ NA
-(Tiệm Chè Na Vũ Lăng, Ngũ Hiệp • Giao nóng 30 phút)`;
+  // 1. POPULATE INVOICE (HÓA ĐƠN ĐIỆN TỬ)
+  const invCode = document.getElementById('invOrderCode');
+  const invTime = document.getElementById('invOrderTime');
+  const invName = document.getElementById('invCustName');
+  const invPhone = document.getElementById('invCustPhone');
+  const invAddr = document.getElementById('invCustAddress');
+  const invNote = document.getElementById('invCustNote');
+  const invNoteWrap = document.getElementById('invNoteWrap');
+  const invTbody = document.getElementById('invItemsTbody');
+  const invSubtotal = document.getElementById('invSubtotal');
+  const invDiscount = document.getElementById('invDiscount');
+  const invFinal = document.getElementById('invFinalTotal');
 
-  // Update VietQR dynamic image and bank details
+  if (invCode) invCode.textContent = orderCode;
+  if (invTime) invTime.textContent = orderTime;
+  if (invName) invName.textContent = customerName || 'Khách đặt online';
+  if (invPhone) invPhone.textContent = customerPhone;
+  if (invAddr) invAddr.textContent = customerAddress;
+  
+  if (invNote && invNoteWrap) {
+    if (customerNote) {
+      invNote.textContent = customerNote;
+      invNoteWrap.style.display = 'flex';
+    } else {
+      invNoteWrap.style.display = 'none';
+    }
+  }
+
+  if (invTbody) invTbody.innerHTML = itemsHtml;
+  if (invSubtotal) invSubtotal.textContent = formatMoney(subtotal);
+  if (invDiscount) invDiscount.textContent = '-' + formatMoney(discount);
+  if (invFinal) invFinal.textContent = formatMoney(finalTotal);
+
+  // 2. POPULATE VIETQR PAYMENT CODE
   const qrImg = document.getElementById('orderQrImage');
   const qrAmountDisplay = document.getElementById('qrAmountDisplay');
   const qrAmountValue = document.getElementById('qrAmountValue');
@@ -607,34 +638,18 @@ ${itemsText}
   if (qrAmountValue) qrAmountValue.value = finalTotal;
   if (qrContentDisplay) qrContentDisplay.textContent = orderTransferContent;
 
-  // Show Order Success Modal directly
+  // 3. SHOW ORDER INVOICE MODAL
   const successModal = document.getElementById('orderSuccessModal');
-  const previewContent = document.getElementById('orderPreviewContent');
-  const btnZaloDirect = document.getElementById('btnOpenZaloDirect');
-
-  if (previewContent) {
-    previewContent.textContent = lastGeneratedZaloOrder;
-  }
-
-  // Generate direct Zalo link
-  const zaloDirectUrl = `https://zalo.me/0986479285`;
-  if (btnZaloDirect) {
-    btnZaloDirect.href = zaloDirectUrl;
-  }
-
-  // Automatically open Zalo chat directly in new tab/app
-  window.open(zaloDirectUrl, '_blank');
-
   if (successModal) {
     successModal.classList.add('active');
   }
 
-  // Clear cart after successful order
+  // Clear cart and show notification
   cart = {};
   saveCart();
   updateCartUI();
   closeCartDrawer();
-  showToast('🎉 Đặt hàng thành công! Đơn đã được chuyển qua Zalo.');
+  showToast('🎉 Đặt hàng thành công! Hóa đơn đã sẵn sàng.');
 }
 
 function copyOrderAgain() {
