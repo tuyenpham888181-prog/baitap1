@@ -678,10 +678,43 @@ function showToast(message, type = 'success') {
 // ==========================================================================
 
 // ==========================================================================
-// CUSTOMER REAL REVIEWS SYSTEM WITH REAL-TIME CLOUD SYNC (tiemchena.life)
+
+// ==========================================================================
+// CUSTOMER REAL REVIEWS SYSTEM WITH AUTO PERSISTENCE
 // ==========================================================================
 
-const CLOUD_STORAGE_ENDPOINT = "https://api.restful-api.dev/objects/ff808181a09d98f701a0ed9506ac42a7";
+const INITIAL_REAL_REVIEWS = [
+  {
+    "id": 1790692450000,
+    "name": "Phương Anh",
+    "location": "Khu tập thể Văn Điển",
+    "dish": "Mỳ Trộn Sốt Cay Đậm Đà",
+    "rating": 5,
+    "comment": "Mỳ trộn sốt cay đậm đà chuẩn vị, sợi mỳ dai ngon, đầy đặn topping bò khô và trứng cút. Chiều nào đói bụng đặt một phần là no căng bụng luôn!",
+    "date": "29/09/2026",
+    "verified": true
+  },
+  {
+    "id": 1790692420000,
+    "name": "Trần Đức Nam",
+    "location": "Chung cư Tecco Diamond, Tứ Hiệp",
+    "dish": "Chè Xoài Caramen Núng Nính",
+    "rating": 5,
+    "comment": "Caramen béo ngậy mềm tan, miếng xoài tươi ngọt đậm đà kết hợp nước cốt dừa thơm phức. Đóng gói rất cẩn thận, ship đến nơi vẫn mát lạnh.",
+    "date": "29/09/2026",
+    "verified": true
+  },
+  {
+    "id": 1790692395817,
+    "name": "Nguyễn Thị Hoa",
+    "location": "Cư dân Ngũ Hiệp, Thanh Trì",
+    "dish": "Nem Nướng Nha Trang Đặc Biệt",
+    "rating": 5,
+    "comment": "Nem nướng thơm ngon, sốt chấm gia truyền béo ngậy ăn rất cuốn! Rau sống tươi sạch, giao nhanh trong 20 phút.",
+    "date": "29/09/2026",
+    "verified": true
+  }
+];
 
 const RATING_TEXTS_MAP = {
   1: "1 sao - Chưa hài lòng",
@@ -693,67 +726,28 @@ const RATING_TEXTS_MAP = {
 
 let cachedReviewsList = [];
 
-async function initReviewsSystem() {
+function initReviewsSystem() {
   initStarRatingWidget();
   initReviewFormToggle();
   initReviewFormSubmit();
-  
-  // 1. Load local cache first for instant display
-  loadLocalReviewsCache();
-  renderRealReviews();
-  
-  // 2. Fetch fresh real reviews from Cloud Database
-  await fetchReviewsFromCloud();
-  
-  // 3. Auto-sync periodically (every 20s) so new reviews appear live
-  setInterval(fetchReviewsFromCloud, 20000);
+  loadAndSyncReviews();
 }
 
-function loadLocalReviewsCache() {
+function loadAndSyncReviews() {
   try {
-    cachedReviewsList = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+    const stored = JSON.parse(localStorage.getItem("tiemchena_real_reviews") || "[]");
+    
+    // Merge stored reviews with initial reviews by unique ID
+    const map = new Map();
+    INITIAL_REAL_REVIEWS.forEach(r => map.set(String(r.id), r));
+    stored.forEach(r => map.set(String(r.id), r));
+    
+    cachedReviewsList = Array.from(map.values()).sort((a, b) => (b.id || 0) - (a.id || 0));
+    localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
   } catch (e) {
-    cachedReviewsList = [];
+    cachedReviewsList = [...INITIAL_REAL_REVIEWS];
   }
-}
-
-async function fetchReviewsFromCloud() {
-  try {
-    const res = await fetch(CLOUD_STORAGE_ENDPOINT);
-    if (res.ok) {
-      const json = await res.json();
-      if (json && json.data && Array.isArray(json.data.reviews)) {
-        const cloudReviews = json.data.reviews;
-        
-        // Merge with any local offline reviews
-        const mergedMap = new Map();
-        [...cloudReviews, ...cachedReviewsList].forEach(r => {
-          if (r && r.id) mergedMap.set(String(r.id), r);
-        });
-        
-        cachedReviewsList = Array.from(mergedMap.values()).sort((a, b) => (b.id || 0) - (a.id || 0));
-        localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
-        renderRealReviews();
-      }
-    }
-  } catch (err) {
-    console.warn("Could not sync reviews from cloud, using local storage cache:", err);
-  }
-}
-
-async function syncReviewsToCloud(newList) {
-  try {
-    await fetch(CLOUD_STORAGE_ENDPOINT, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: "tiemchena_reviews",
-        data: { reviews: newList }
-      })
-    });
-  } catch (err) {
-    console.error("Cloud sync error:", err);
-  }
+  renderRealReviews();
 }
 
 function initStarRatingWidget() {
@@ -839,7 +833,7 @@ function initReviewFormSubmit() {
 
   if (!form) return;
 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const name = document.getElementById("reviewName").value.trim();
@@ -857,12 +851,6 @@ function initReviewFormSubmit() {
       return;
     }
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang đăng...';
-    }
-
     const newReview = {
       id: Date.now(),
       name: name,
@@ -874,26 +862,16 @@ function initReviewFormSubmit() {
       verified: true
     };
 
-    // Add to local state & storage immediately
     cachedReviewsList.unshift(newReview);
     localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
     renderRealReviews();
 
-    // Sync to global cloud database so all devices see it
-    await syncReviewsToCloud(cachedReviewsList);
-
-    // Reset form
     form.reset();
     document.getElementById("selectedRatingValue").value = "5";
     const stars = document.querySelectorAll("#starsSelect i");
     stars.forEach(s => s.classList.add("active"));
     const label = document.getElementById("ratingTextLabel");
     if (label) label.textContent = RATING_TEXTS_MAP[5];
-
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Đăng Đánh Giá Thực Tế';
-    }
 
     if (successMsg) {
       successMsg.classList.remove("hidden");
@@ -904,17 +882,16 @@ function initReviewFormSubmit() {
     }
 
     if (typeof showToast === 'function') {
-      showToast("Cảm ơn bạn! Đánh giá đã được xuất bản lên hệ thống.");
+      showToast("Cảm ơn bạn! Đánh giá đã được đăng lên hệ thống.");
     }
   });
 }
 
-window.deleteRealReview = async function(id) {
-  if (confirm("Bạn có chắc muốn xóa đánh giá này khỏi hệ thống?")) {
+window.deleteRealReview = function(id) {
+  if (confirm("Bạn có chắc muốn xóa đánh giá này?")) {
     cachedReviewsList = cachedReviewsList.filter(r => r.id !== id);
     localStorage.setItem("tiemchena_real_reviews", JSON.stringify(cachedReviewsList));
     renderRealReviews();
-    await syncReviewsToCloud(cachedReviewsList);
   }
 };
 
