@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiệm Chè Na - Nem Nướng, Mỳ Trộn, Chè Xoài Caramen & Ăn Vặt Ngũ Hiệp, Thanh Trì</title>
+  <meta name="description" content="Đặt món trực tuyến tại Tiệm Chè Na (Vũ Lăng, Ngũ Hiệp, Thanh Trì). Nem nướng 35k, Mỳ trộn sốt cay 35k, Chân gà sốt Thái 35k, Chè xoài caramen 30k. Giao nóng giòn 30 phút, giảm 10% khi đặt trước!">
+  <meta name="keywords" content="tiệm chè na, nem nướng ngũ hiệp, mỳ trộn thanh trì, chè xoài caramen, chân gà sốt thái ngũ hiệp, ăn vặt vũ lăng thanh trì">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍵</text></svg>">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar">
+    <div class="container bar-content">
+      <div class="bar-tag"><i class="fa-solid fa-fire"></i> SIÊU ƯU ĐÃI</div>
+      <p class="bar-text">
+        <strong>GIẢM NGAY 10%</strong> tổng hóa đơn khi đặt trước hoặc chốt đơn qua Zalo hôm nay!
+      </p>
+      <a href="#menu" class="bar-link">Đặt Món Ngay <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </aside>
+
+  <!-- Main Navigation -->
+  <header class="site-header" id="header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-bowl-food"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">TIỆM CHÈ NA</span>
+          <span class="logo-subtitle"><i class="fa-solid fa-location-dot"></i> Vũ Lăng • Ngũ Hiệp • Thanh Trì</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="#mon-hot" class="nav-link"><i class="fa-solid fa-fire-flame-curved"></i> Món Hot</a>
+        <a href="#menu" class="nav-link"><i class="fa-solid fa-utensils"></i> Menu Đặt Món</a>
+        <a href="#menu-goc" class="nav-link"><i class="fa-solid fa-book-open"></i> Bảng Menu Gốc</a>
+        <a href="#attp" class="nav-link"><i class="fa-solid fa-shield-halved"></i> Chuẩn ATTP</a>
+        <a href="#uu-dai" class="nav-link"><i class="fa-solid fa-tag"></i> Ưu Đãi 10%</a>
+        <a href="#danh-gia" class="nav-link"><i class="fa-solid fa-star"></i> Đánh Giá</a>
+        <a href="#lien-he" class="nav-link"><i class="fa-solid fa-phone"></i> Liên Hệ</a>
+      </nav>
+
+      <!-- Header Action Buttons -->
+      <div class="header-actions">
+        <a href="tel:0986479285" class="btn-call-mini" title="Gọi Hotline: 0986.479.285">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span class="desktop-only">0986.479.285</span>
+        </a>
+        <button class="cart-trigger-btn" id="openCartBtn" onclick="openCartDrawer()" aria-label="Xem giỏ hàng">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-text desktop-only">Giỏ Hàng</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Status Bar -->
+  <div class="store-status-bar">
+    <div class="container status-content">
+      <div class="status-indicator">
+        <span class="status-dot pulse"></span>
+        <span class="status-text" id="statusText">Đang mở cửa phục vụ nóng hổi • 09:00 - 22:30</span>
+      </div>
+      <div class="delivery-time-badge">
+        <i class="fa-solid fa-bolt-lightning text-accent"></i> Giao nhanh 30 phút khu vực Thanh Trì
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+    </div>
+    <div class="container hero-grid">
+      <div class="hero-text-content">
+        <div class="hero-chip">
+          <i class="fa-solid fa-crown text-accent"></i> Quán Ăn Vặt & Chè Số 1 Ngũ Hiệp
+        </div>
+        <h1 class="hero-heading">
+          ĐẠI TIỆC ĂN VẶT NÓNG HỔI & <span class="highlight-gradient">CHÈ THANH MÁT</span> CHUẨN VỊ!
+        </h1>
+        <p class="hero-desc">
+          Cơn đói chiều tối ập đến? Chẳng cần dắt xe đi đâu xa! <strong>Tiệm Chè Na</strong> chuẩn bị nóng giòn tận chảo, chè thơm béo ngọt thanh và giao tận tay bạn chỉ trong <strong>30 phút</strong>!
+        </p>
+
+        <!-- Quick Best-Seller Tags -->
+        <div class="bestseller-chips">
+          <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-fire"></i> Nem Nướng: <strong>35k</strong></span>
+          <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-bowl-food"></i> Mỳ Trộn Cay: <strong>35k</strong></span>
+          <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-drumstick-bite"></i> Chân Gà Thái: <strong>35k</strong></span>
+          <span class="chip" onclick="filterAndScroll('cold')"><i class="fa-solid fa-lemon"></i> Chè Xoài Caramen: <strong>30k</strong></span>
+          <span class="chip" onclick="filterAndScroll('cold')"><i class="fa-solid fa-mug-hot"></i> Trà Sữa: <strong>25k</strong></span>
+        </div>
+
+        <!-- Primary Action Buttons -->
+        <div class="hero-cta-group">
+          <a href="https://zalo.me/0986479285" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+            <i class="fa-solid fa-paper-plane"></i> ĐẶT QUA ZALO (GIẢM 10%)
+          </a>
+          <a href="#menu" class="btn btn-secondary btn-large">
+            <i class="fa-solid fa-utensils"></i> XEM MENU ĐẶT MÓN
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="hero-trust-row">
+          <div class="trust-item"><i class="fa-solid fa-truck-fast"></i> Ship thần tốc 30'</div>
+          <div class="trust-item"><i class="fa-solid fa-percent"></i> Giảm 10% đặt trước</div>
+          <div class="trust-item"><i class="fa-solid fa-shield-heart"></i> 100% Sạch & An Toàn</div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Showcase -->
+      <div class="hero-visual-card">
+        <div class="visual-card-inner">
+          <div class="badge-combo">✨ COMBO SIÊU HOT</div>
+          <img src="images/img_09.jpg" alt="Tiệm Chè Na - Bộ Tứ Món Ăn Vặt Nóng Sốt" class="hero-main-img">
+          <div class="hero-floating-card top-left">
+            <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
+            <div class="card-info">
+              <strong>Nem Nướng Nha Trang</strong>
+              <small>Nóng giòn • 35.000đ</small>
+            </div>
+          </div>
+          <div class="hero-floating-card bottom-right">
+            <div class="card-icon cold"><i class="fa-solid fa-snowflake"></i></div>
+            <div class="card-info">
+              <strong>Chè Xoài Caramen</strong>
+              <small>Mát lạnh ngậy béo • 30.000đ</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 Super Hot Signature Dishes Section -->
+  <section class="section signature-section" id="mon-hot">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-fire"></i> HÌNH THẬT TẠI TIỆM</span>
+        <h2 class="section-title">2 Món "Vedette" Vạn Người Mê Tại Tiệm Chè Na</h2>
+        <p class="section-subtitle">Chưa thử 2 món này là chưa thực sự trải nghiệm tinh hoa ẩm thực Tiệm Chè Na!</p>
+      </div>
+
+      <div class="signature-grid">
+        <!-- Nem Nuong Card -->
+        <div class="signature-card">
+          <div class="card-image-wrap">
+            <span class="badge badge-hot"><i class="fa-solid fa-crown"></i> BEST-SELLER SỐ 1</span>
+            <img src="images/img_06.jpg" alt="Nem Nướng Nha Trang Đặc Biệt Tiệm Chè Na" class="card-img" onclick="openLightbox('images/img_06.jpg', 'Nem Nướng Nha Trang Đặc Biệt')">
+            <button class="btn-zoom-img" onclick="openLightbox('images/img_06.jpg', 'Nem Nướng Nha Trang')" title="Phóng to ảnh">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="card-header-row">
+              <h3 class="card-title">Nem Nướng Nha Trang Đặc Biệt</h3>
+              <span class="card-price">35.000đ</span>
+            </div>
+            <p class="card-desc">
+              Nem nướng thơm lừng than hoa, cuốn cùng ram giòn rụm, bánh tráng mềm, dưa leo, xoài xanh, rau thơm và nước sốt thịt băm gia truyền béo bùi sánh mịn đặc trưng!
+            </p>
+            <div class="card-feature-tags">
+              <span><i class="fa-solid fa-check"></i> Đầy đủ rau & ram giòn</span>
+              <span><i class="fa-solid fa-check"></i> Sốt chấm gia truyền</span>
+            </div>
+            <div class="card-footer-row">
+              <button class="btn btn-add-cart" onclick="addToCart('nem-nuong')">
+                <i class="fa-solid fa-cart-plus"></i> Thêm Vào Giỏ
+              </button>
+              <button class="btn btn-outline" onclick="openCustomizeModal('nem-nuong')">
+                <i class="fa-solid fa-sliders"></i> Tùy chọn
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Che Xoai Caramen Card -->
+        <div class="signature-card">
+          <div class="card-image-wrap">
+            <span class="badge badge-cold"><i class="fa-solid fa-snowflake"></i> MÁT LẠNH BÉO NGẬY</span>
+            <img src="images/img_02.jpg" alt="Chè Xoài Caramen Núng Nính Tiệm Chè Na" class="card-img" onclick="openLightbox('images/img_02.jpg', 'Chè Xoài Caramen Núng Nính')">
+            <button class="btn-zoom-img" onclick="openLightbox('images/img_02.jpg', 'Chè Xoài Caramen')" title="Phóng to ảnh">
+              <i class="fa-solid fa-expand"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="card-header-row">
+              <h3 class="card-title">Chè Xoài Caramen Núng Nính</h3>
+              <span class="card-price">30.000đ</span>
+            </div>
+            <p class="card-desc">
+              Bánh caramen mềm mượt núng nính không hề rỗ, thịt xoài tươi vàng mọng ngọt lịm, thạch rau câu giòn sần sật quyện cùng cốt dừa sánh béo thơm lừng giải nhiệt tức thì!
+            </p>
+            <div class="card-feature-tags">
+              <span><i class="fa-solid fa-check"></i> Caramen tự làm mỗi ngày</span>
+              <span><i class="fa-solid fa-check"></i> Xoài tươi 100%</span>
+            </div>
+            <div class="card-footer-row">
+              <button class="btn btn-add-cart" onclick="addToCart('che-xoai')">
+                <i class="fa-solid fa-cart-plus"></i> Thêm Vào Giỏ
+              </button>
+              <button class="btn btn-outline" onclick="openCustomizeModal('che-xoai')">
+                <i class="fa-solid fa-sliders"></i> Tùy chọn
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Big Combos Banner Grid -->
+  <section class="section combos-showcase-section bg-alt">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-layer-group"></i> BỘ SƯU TẬP MÓN THẬT</span>
+        <h2 class="section-title">Hai Bộ Tứ Món Độc Quyền Tiệm Chè Na</h2>
+        <p class="section-subtitle">Chế biến sạch sẽ • Dầu chiên mới 100% • Giữ nóng giòn đến tận bàn ăn</p>
+      </div>
+
+      <div class="combos-grid">
+        <!-- Banner 1: Bo tu an vat -->
+        <div class="combo-banner-card">
+          <div class="combo-img-wrap">
+            <img src="images/img_09.jpg" alt="Bộ Tứ Ăn Vặt Nóng: Mỳ Trộn, Nem Nướng, Mỳ Cay, Chân Gà">
+            <div class="combo-overlay">
+              <span class="combo-badge hot">BỘ TỨ ĂN VẶT NÓNG GIÒN</span>
+              <h3 class="combo-title">Mỳ Trộn • Nem Nướng • Mỳ Cay • Chân Gà Thái</h3>
+              <p class="combo-desc">Nóng hổi tận chảo, cay tê đậm vị, giòn rụm kích thích mọi giác quan!</p>
+              <a href="#menu" onclick="filterCategory('hot')" class="btn btn-primary btn-sm">Xem Menu Ăn Vặt <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Banner 2: Bo tu che thanh mat -->
+        <div class="combo-banner-card">
+          <div class="combo-img-wrap">
+            <img src="images/img_10.jpg" alt="Bộ Tứ Chè Thanh Mát: Chè Xoài, Trà Sữa, Chè Truyền Thống, Nước Ép">
+            <div class="combo-overlay">
+              <span class="combo-badge cold">BỘ TỨ GIẢI NHIỆT THANH MÁT</span>
+              <h3 class="combo-title">Chè Xoài • Trà Sữa • Tào Phớ • Sữa Chua Mít</h3>
+              <p class="combo-desc">Cốt dừa béo ngậy nguyên chất, caramen mịn tan, ngọt thanh không ngấy!</p>
+              <a href="#menu" onclick="filterCategory('cold')" class="btn btn-secondary btn-sm">Xem Menu Chè <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem & Solution Comparison -->
+  <section class="section comparison-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-heart-circle-check"></i> THẤU HIỂU KHÁCH HÀNG</span>
+        <h2 class="section-title">Thèm Ăn Vặt Chiều Tối, Nhưng Bạn Đang E Ngại...?</h2>
+        <p class="section-subtitle">Tiệm Chè Na giải quyết mọi nỗi lo để bạn tận hưởng trọn vẹn từng món ngon!</p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- Bad side -->
+        <div class="comparison-card bad-card">
+          <div class="comp-header">
+            <div class="comp-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Nỗi Lo Khi Mua Quán Khác</h3>
+          </div>
+          <ul class="comp-list">
+            <li>
+              <i class="fa-solid fa-circle-xmark"></i>
+              <div>
+                <strong>Bụng đói cồn cào nhưng ngại đi xa:</strong>
+                <p>Tan làm mệt mỏi, trời mưa gió tắc đường lười dắt xe đi tìm quán ăn.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-xmark"></i>
+              <div>
+                <strong>Nơm nớp lo thực phẩm bẩn:</strong>
+                <p>Sợ quán vỉa hè dùng dầu chiên đen ngòm đi chiên lại nhiều lần, ăn xong đau bụng khó chịu.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-xmark"></i>
+              <div>
+                <strong>Đặt app ship lâu, đồ ăn nguội ngắt:</strong>
+                <p>Chờ cả tiếng đồng hồ mòn mỏi, nhận về nem ỉu xìu, chè tan hết đá nhạt toẹt mất ngon.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Good side -->
+        <div class="comparison-card good-card">
+          <div class="comp-header">
+            <div class="comp-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3>Sự Khác Biệt Tại Tiệm Chè Na</h3>
+          </div>
+          <ul class="comp-list">
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>Giao thần tốc trong 30 phút tại Thanh Trì:</strong>
+                <p>Vị trí ngay Vũ Lăng, Ngũ Hiệp giúp tiệm ship cực nhanh, đóng gói cách nhiệt cẩn thận.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>Dầu chiên mới 100% & Nguyên liệu sạch ATTP:</strong>
+                <p>Nem nướng, nem lụi hút chân không có tem mác; chè nấu mới mỗi ngày với hoa quả tươi sạch.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>Chỉ làm khi nhận đơn – Nóng giòn tận tay:</strong>
+                <p>Nem giòn rụm, nước sốt nóng hổi, chè béo ngậy đá để riêng đảm bảo chuẩn vị 100%.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="#menu" class="btn btn-primary btn-large">
+          <i class="fa-solid fa-basket-shopping"></i> KHÁM PHÁ THỰC ĐƠN & ĐẶT NGAY
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu Section -->
+  <section class="section menu-section bg-alt" id="menu">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-bars-staggered"></i> THỰC ĐƠN ĐẦY ĐỦ • GIÁ BÌNH DÂN</span>
+        <h2 class="section-title">Menu Đặt Món Trực Tuyến Tiệm Chè Na</h2>
+        <p class="section-subtitle">Bấm <strong>"+ Thêm Vào Giỏ"</strong> để chọn món, sau đó gửi đơn nhanh chóng qua Zalo hoặc Hotline!</p>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="menu-controls-wrapper">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="menuSearchInput" placeholder="Tìm món ngon: nem nướng, mỳ trộn, chè xoài, chân gà..." oninput="handleSearch(this.value)">
+          <button id="clearSearchBtn" onclick="clearSearch()" class="btn-clear-search" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs">
+          <button class="cat-btn active" data-category="all" onclick="filterCategory('all')">
+            <i class="fa-solid fa-border-all"></i> Tất Cả Món (<span id="countAll">0</span>)
+          </button>
+          <button class="cat-btn" data-category="hot" onclick="filterCategory('hot')">
+            <i class="fa-solid fa-fire"></i> Ăn Vặt Nóng Giòn (<span id="countHot">0</span>)
+          </button>
+          <button class="cat-btn" data-category="cold" onclick="filterCategory('cold')">
+            <i class="fa-solid fa-snowflake"></i> Chè & Trà Sữa Mát Lạnh (<span id="countCold">0</span>)
+          </button>
+          <button class="cat-btn" data-category="pack" onclick="filterCategory('pack')">
+            <i class="fa-solid fa-box-archive"></i> Đóng Túi Hút Chân Không (<span id="countPack">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div class="menu-grid" id="menuGridContainer">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="menu-empty-state" id="menuEmptyState" style="display: none;">
+        <i class="fa-solid fa-magnifying-glass-chart"></i>
+        <h3>Không tìm thấy món phù hợp!</h3>
+        <p>Vui lòng thử tìm kiếm bằng từ khóa khác hoặc bấm nút bên dưới để xem lại tất cả món.</p>
+        <button class="btn btn-primary btn-sm" onclick="filterCategory('all'); clearSearch();">Xem Toàn Bộ Menu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Original Menu Board Gallery (High-Res Zoomable) -->
+  <section class="section menu-board-section" id="menu-goc">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-images"></i> BẢNG MENU GỐC TIỆM CHÈ NA</span>
+        <h2 class="section-title">Bảng Menu Đầy Đủ & Chi Tiết Từng Topping</h2>
+        <p class="section-subtitle">Nhấp vào bất kỳ bảng menu nào bên dưới để phóng to xem trọn vẹn toàn bộ danh sách món và giá thành!</p>
+      </div>
+
+      <div class="menu-boards-grid">
+        <!-- Board 1: An vat & Met -->
+        <div class="board-card" onclick="openLightbox('images/img_17.jpg', 'Bảng Menu Đồ Ăn Vặt, Nem Nướng, Bánh Mì Chảo, Mẹt Nem Lụi & Đồ Chiên')">
+          <div class="board-img-container">
+            <img src="images/img_17.jpg" alt="Menu Đồ Ăn Vặt Tiệm Chè Na">
+            <div class="board-hover-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Nhấn Để Phóng To</span>
+            </div>
+          </div>
+          <div class="board-info">
+            <span class="board-badge hot">BẢNG ĂN VẶT & MẸT</span>
+            <h4 class="board-title">Nem Nướng, Mỳ Trộn, Mẹt Nem Lụi & Đồ Chiên</h4>
+            <p class="board-desc">Đầy đủ mỳ cay 7 cấp độ, phở cuốn, bánh mì chảo, gà rán cay, xúc xích, kimbap chiên...</p>
+          </div>
+        </div>
+
+        <!-- Board 2: Che & Nuoc uong -->
+        <div class="board-card" onclick="openLightbox('images/img_16.jpg', 'Bảng Menu Chè Xoài, Trà Sữa, Chè Dừa Dầm, Sinh Tố Bơ & Nước Ép')">
+          <div class="board-img-container">
+            <img src="images/img_16.jpg" alt="Menu Chè & Đồ Uống Tiệm Chè Na">
+            <div class="board-hover-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Nhấn Để Phóng To</span>
+            </div>
+          </div>
+          <div class="board-info">
+            <span class="board-badge cold">BẢNG CHÈ & ĐỒ UỐNG</span>
+            <h4 class="board-title">Chè Xoài, Trà Sữa, Nước Ép & Sinh Tố Bơ</h4>
+            <p class="board-desc">Chè dừa dầm, tào phớ caramen, sữa chua mít, trà chanh giã tay, sinh tố hoa quả...</p>
+          </div>
+        </div>
+
+        <!-- Board 3: Chan ga sot Thai -->
+        <div class="board-card" onclick="openLightbox('images/img_12.jpg', 'Bảng Menu Chuyên Chân Gà Sốt Thái, Sả Tắc, Rút Xương Tiệm Chè Na')">
+          <div class="board-img-container">
+            <img src="images/img_12.jpg" alt="Menu Chân Gà Sốt Thái Tiệm Chè Na">
+            <div class="board-hover-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Nhấn Để Phóng To</span>
+            </div>
+          </div>
+          <div class="board-info">
+            <span class="board-badge hot">CHUYÊN CHÂN GÀ SỐT THÁI</span>
+            <h4 class="board-title">Chân Gà Sốt Thái, Sả Tắc, Hấp Sả & Xào Cay</h4>
+            <p class="board-desc">Suất nhỏ chỉ từ 35k, suất lớn 55k - 65k, tặng kèm xoài cóc chua ngọt và bánh mì giòn!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATTP & Quality Commitment Section -->
+  <section class="section attp-section bg-alt" id="attp">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> MINH BẠCH NGUỒN GỐC & VỆ SINH</span>
+        <h2 class="section-title">Cam Kết An Toàn Vệ Sinh Thực Phẩm 100%</h2>
+        <p class="section-subtitle">Tại Tiệm Chè Na, sức khỏe và sự an tâm của thực khách là ưu tiên số một trong từng khâu chế biến!</p>
+      </div>
+
+      <div class="attp-cards-grid">
+        <!-- Packaging 1 -->
+        <div class="attp-card">
+          <div class="attp-img-wrap">
+            <img src="images/img_14.jpg" alt="Nem Nướng Nha Trang đóng gói hút chân không có tem mác ATTP" onclick="openLightbox('images/img_14.jpg', 'Nem Nướng Nha Trang đóng gói hút chân không có tem mác')">
+            <span class="attp-tag"><i class="fa-solid fa-certificate"></i> Chuẩn Tem Mác</span>
+          </div>
+          <div class="attp-body">
+            <h4>Nem Nướng Nha Trang Hút Chân Không</h4>
+            <p class="attp-text">Đóng gói hút chân không vô trùng, có đầy đủ tem nhãn nguồn gốc xuất xứ và nước sốt chấm gia truyền đi kèm.</p>
+            <div class="attp-price-row">
+              <span class="price">95.000đ / túi</span>
+              <button class="btn btn-primary btn-sm" onclick="addToCart('pack-nem-nuong')">+ Mua Túi Về Tự Nướng</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Packaging 2 -->
+        <div class="attp-card">
+          <div class="attp-img-wrap">
+            <img src="images/img_15.jpg" alt="Nem Lụi Huế que sả tươi đóng gói hút chân không" onclick="openLightbox('images/img_15.jpg', 'Nem Lụi Huế que sả tươi đóng gói hút chân không')">
+            <span class="attp-tag"><i class="fa-solid fa-certificate"></i> Que Sả Tươi</span>
+          </div>
+          <div class="attp-body">
+            <h4>Nem Lụi Huế Que Sả Hút Chân Không</h4>
+            <p class="attp-text">Nem lụi bọc que sả tươi thơm nức mũi, thịt tươi ngọt chuẩn vị Cố Đô, kèm nước lèo đậu phộng béo bùi độc quyền.</p>
+            <div class="attp-price-row">
+              <span class="price">95.000đ / túi</span>
+              <button class="btn btn-primary btn-sm" onclick="addToCart('pack-nem-lui')">+ Mua Túi Về Tự Nướng</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Quality Pillars -->
+      <div class="pillars-grid mt-6">
+        <div class="pillar-box">
+          <div class="pillar-icon"><i class="fa-solid fa-droplet"></i></div>
+          <h4>Dầu Chiên Mới 100%</h4>
+          <p>Nói không với dầu chiên đi chiên lại. Đồ ăn vàng ươm, thơm rụm giòn tan, không hề ám khét.</p>
+        </div>
+        <div class="pillar-box">
+          <div class="pillar-icon"><i class="fa-solid fa-box-open"></i></div>
+          <h4>Bao Bì Sạch Vệ Sinh</h4>
+          <p>Hộp đựng giấy an toàn thực phẩm, đá và thạch đóng riêng biệt tinh tươm giữ trọn độ ngon.</p>
+        </div>
+        <div class="pillar-box">
+          <div class="pillar-icon"><i class="fa-solid fa-seedling"></i></div>
+          <h4>Rau Củ Tươi Trong Ngày</h4>
+          <p>Rau sống, xoài, cóc, dưa chuột được rửa nước muối sạch bong, giòn ngọt thanh khiết.</p>
+        </div>
+        <div class="pillar-box">
+          <div class="pillar-icon"><i class="fa-solid fa-blender"></i></div>
+          <h4>Chè Nấu Mới Mỗi Ngày</h4>
+          <p>Nước cốt dừa thơm ngậy tự nhiên, caramen béo mịn không rỗ, hoàn toàn không chất bảo quản.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10% Discount Campaign Promo Banner -->
+  <section class="section promo-banner-section" id="uu-dai">
+    <div class="container">
+      <div class="promo-banner-card">
+        <div class="promo-content">
+          <div class="promo-badge"><i class="fa-solid fa-gift"></i> ƯU ĐÃI ĐẶC BIỆT KHI ĐẶT ONLINE</div>
+          <h2 class="promo-title">GIẢM NGAY 10% TỔNG ĐƠN KHI ĐẶT TRƯỚC HÔM NAY!</h2>
+          <p class="promo-desc">
+            Chỉ cần đặt trước từ 20-30 phút qua website hoặc Zalo, Tiệm Chè Na sẽ chuẩn bị sẵn từng phần ăn nóng hổi, giòn rụm và tự động áp dụng chiết khấu 10% cho bạn!
+          </p>
+          <div class="promo-benefits">
+            <span><i class="fa-solid fa-circle-check"></i> Áp dụng cho toàn bộ Menu</span>
+            <span><i class="fa-solid fa-circle-check"></i> Freeship trong bán kính 2km</span>
+            <span><i class="fa-solid fa-circle-check"></i> Tặng kèm sốt chấm đặc biệt</span>
+          </div>
+          <div class="promo-cta-row">
+            <a href="https://zalo.me/0986479285" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+              <i class="fa-solid fa-paper-plane"></i> NHẬN ƯU ĐÃI QUA ZALO
+            </a>
+            <a href="tel:0986479285" class="btn btn-outline-white btn-large">
+              <i class="fa-solid fa-phone"></i> GỌI 0986.479.285
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews & Testimonials -->
+  <section class="section reviews-section bg-alt" id="danh-gia">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-comment-dots"></i> FEEDBACK CHÂN THẬT</span>
+        <h2 class="section-title">Khách Hàng Thanh Trì Nói Gì Về Tiệm Chè Na?</h2>
+        <p class="section-subtitle">Hơn 5.000+ bữa ăn ngon đã được giao đến tận tay bà con khu vực Ngũ Hiệp, Tứ Hiệp, Văn Điển!</p>
+      </div>
+
+      <div class="reviews-grid">
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">
+            "Nem nướng 35k ở đây suất đầy đặn bất ngờ! Cuốn bánh tráng kèm dưa chuột, ram giòn và nước chấm sền sệt béo bùi chuẩn vị Nha Trang luôn. Ship qua Ngũ Hiệp chưa đầy 20 phút mà đồ vẫn nóng giòn rụm."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">LN</div>
+            <div class="reviewer-info">
+              <strong>Lê Ngọc</strong>
+              <small><i class="fa-solid fa-location-dot"></i> Cư dân Vũ Lăng, Ngũ Hiệp</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">
+            "Nghiện món Chè Xoài Caramen 30k và Chân gà sốt Thái của quán! Caramen mềm mướt không rỗ, xoài ngọt lịm quyện cốt dừa ngậy ngậy. Buổi chiều làm cốc chè kèm đĩa mỳ trộn 35k là no căng bụng làm việc đến tối."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">HM</div>
+            <div class="reviewer-info">
+              <strong>Hoàng Minh</strong>
+              <small><i class="fa-solid fa-location-dot"></i> Văn phòng KĐT Tứ Hiệp, Thanh Trì</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">
+            "Mấy đứa con nhà mình mê tít bánh mì chảo, mẹt nem lụi và trà sữa 25k ở Tiệm Chè Na. Đóng gói rất sạch sẽ, hộp giấy vệ sinh, chị chủ quán thân thiện lại còn giảm 10% khi nhắn Zalo đặt trước nữa. Sẽ ủng hộ dài dài!"
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar">TT</div>
+            <div class="reviewer-info">
+              <strong>Chị Thu Thủy</strong>
+              <small><i class="fa-solid fa-location-dot"></i> Ngũ Hiệp, Thanh Trì</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location, Opening Hours & Contact Section -->
+  <section class="section contact-section" id="lien-he">
+    <div class="container">
+      <div class="contact-box-grid">
+        <div class="contact-info-panel">
+          <span class="section-tag"><i class="fa-solid fa-store"></i> GHÉ QUÁN HOẶC GỌI SHIP</span>
+          <h2 class="contact-title">Đói Bụng Rồi Đúng Không? Đặt Ngay Để Tiệm Chè Na Phục Vụ!</h2>
+          
+          <div class="contact-detail-items">
+            <div class="contact-item">
+              <div class="item-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="item-content">
+                <strong>Địa Chỉ Quán:</strong>
+                <p>Vũ Lăng, Xã Ngũ Hiệp, Huyện Thanh Trì, Hà Nội</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="item-icon"><i class="fa-solid fa-phone-volume"></i></div>
+              <div class="item-content">
+                <strong>Hotline / Zalo Đặt Hàng:</strong>
+                <p><a href="tel:0986479285" class="highlight-link">0986.479.285</a> (Tư vấn & Giao nhanh)</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="item-icon"><i class="fa-solid fa-clock"></i></div>
+              <div class="item-content">
+                <strong>Giờ Mở Cửa:</strong>
+                <p>09:00 - 22:30 (Mở cửa tất cả các ngày trong tuần)</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="item-icon"><i class="fa-solid fa-motorcycle"></i></div>
+              <div class="item-content">
+                <strong>Khu Vực Giao Hàng:</strong>
+                <p>Ship nhanh toàn khu vực Ngũ Hiệp, Tứ Hiệp, Vũ Lăng, Đông Mỹ, Ngọc Hồi, Văn Điển, Thanh Trì.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-action-buttons">
+            <a href="https://zalo.me/0986479285" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i class="fa-solid fa-comments"></i> CHAT ZALO NGAY
+            </a>
+            <a href="tel:0986479285" class="btn btn-secondary">
+              <i class="fa-solid fa-phone"></i> GỌI 0986.479.285
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-map-panel">
+          <div class="map-card-inner">
+            <div class="map-header">
+              <i class="fa-solid fa-route"></i>
+              <h4>Khoảng Cách & Thời Gian Giao Hàng</h4>
+            </div>
+            <div class="shipping-info-table">
+              <div class="ship-row">
+                <span class="area"><i class="fa-solid fa-location-crosshairs"></i> Vũ Lăng, Ngũ Hiệp:</span>
+                <span class="badge-time">15 - 20 phút (Freeship)</span>
+              </div>
+              <div class="ship-row">
+                <span class="area"><i class="fa-solid fa-location-crosshairs"></i> KĐT Tứ Hiệp, Ngọc Hồi:</span>
+                <span class="badge-time">20 - 25 phút</span>
+              </div>
+              <div class="ship-row">
+                <span class="area"><i class="fa-solid fa-location-crosshairs"></i> Văn Điển, Đông Mỹ:</span>
+                <span class="badge-time">25 - 35 phút</span>
+              </div>
+            </div>
+
+            <div class="note-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Mọi đơn hàng đều được đóng hộp giấy thực phẩm sạch sẽ, đồ ăn nóng và đồ chè mát được phân loại riêng kèm đá lạnh.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">🍵 TIỆM CHÈ NA</div>
+        <p class="footer-slogan">Thơm ngon chuẩn vị • Nóng giòn tận chảo • Mát lạnh thanh khiết</p>
+      </div>
+      <div class="footer-summary">
+        <p><strong>Món Nổi Bật:</strong> Nem Nướng Nha Trang • Mỳ Trộn Sốt Cay • Chân Gà Sốt Thái • Mỳ Cay 7 Cấp Độ • Bánh Mì Chảo • Chè Xoài Caramen • Trà Sữa Trân Châu • Chè Dừa Dầm</p>
+        <p><strong>Địa chỉ:</strong> Vũ Lăng, Ngũ Hiệp, Thanh Trì, Hà Nội • <strong>Hotline/Zalo:</strong> <a href="tel:0986479285">0986.479.285</a></p>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Bản quyền thuộc về <strong>Tiệm Chè Na</strong>. Thiết kế & Phát triển với đầy tâm huyết.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Sticky Bar -->
+  <div class="mobile-sticky-bar" id="mobileStickyBar">
+    <div class="sticky-cart-info" onclick="openCartDrawer()">
+      <div class="sticky-cart-icon">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span class="sticky-badge" id="mobileCartCount">0</span>
+      </div>
+      <div class="sticky-totals">
+        <span class="total-label">Tổng tiền món:</span>
+        <span class="total-val" id="mobileCartTotal">0đ</span>
+      </div>
+    </div>
+    <div class="sticky-action-btns">
+      <button class="btn btn-sticky-zalo" onclick="openCartDrawer()">
+        <i class="fa-solid fa-cart-shopping"></i> Đặt Món
+      </button>
+      <a href="tel:0986479285" class="btn btn-sticky-call" title="Gọi ngay">
+        <i class="fa-solid fa-phone"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Cart Drawer / Modal -->
+  <div class="cart-modal-backdrop" id="cartBackdrop" onclick="handleBackdropClick(event)">
+    <div class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <div class="cart-header-title">
+          <i class="fa-solid fa-cart-shopping text-accent"></i>
+          <h3>Giỏ Hàng Của Bạn</h3>
+          <span class="cart-items-count" id="cartDrawerCount">(0 món)</span>
+        </div>
+        <button class="btn-close-cart" onclick="closeCartDrawer()" aria-label="Đóng giỏ hàng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div class="cart-body" id="cartItemsList">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Cart Summary & Checkout Form -->
+      <div class="cart-footer" id="cartFooter">
+        <!-- Pricing Breakdown -->
+        <div class="cart-summary-box">
+          <div class="summary-row">
+            <span>Tạm tính:</span>
+            <span id="cartSubtotal">0đ</span>
+          </div>
+          <div class="summary-row discount-row">
+            <span><i class="fa-solid fa-tags"></i> Ưu đãi đặt trước (10%):</span>
+            <span id="cartDiscount">-0đ</span>
+          </div>
+          <div class="summary-row total-row">
+            <strong>Tổng thanh toán:</strong>
+            <strong class="final-total" id="cartFinalTotal">0đ</strong>
+          </div>
+        </div>
+
+        <!-- Customer Order Inputs -->
+        <div class="order-form">
+          <div class="form-title"><i class="fa-solid fa-user-pen"></i> Thông Tin Nhận Hàng</div>
+          <div class="form-group">
+            <input type="text" id="orderCustomerName" placeholder="Họ và tên của bạn *" class="form-input">
+          </div>
+          <div class="form-group">
+            <input type="tel" id="orderCustomerPhone" placeholder="Số điện thoại nhận hàng *" class="form-input">
+          </div>
+          <div class="form-group">
+            <input type="text" id="orderCustomerAddress" placeholder="Địa chỉ giao hàng (Số nhà, thôn/xóm, xã/phường) *" class="form-input">
+          </div>
+          <div class="form-group">
+            <textarea id="orderCustomerNote" placeholder="Ghi chú thêm (VD: ít cay, nhiều sốt chấm, để đá riêng...)" class="form-input form-textarea" rows="2"></textarea>
+          </div>
+        </div>
+
+        <!-- Checkout Actions -->
+        <div class="cart-actions-group">
+          <button class="btn btn-primary btn-block btn-checkout-zalo" onclick="submitOrderToZalo()">
+            <i class="fa-solid fa-paper-plane"></i> GỬI ĐƠN HÀNG QUA ZALO TIỆM NA
+          </button>
+          <a href="tel:0986479285" class="btn btn-secondary btn-block">
+            <i class="fa-solid fa-phone-volume"></i> GỌI ĐẶT TRỰC TIẾP (0986.479.285)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item Customize Modal -->
+  <div class="modal-backdrop" id="customizeModalBackdrop" onclick="handleCustomizeBackdropClick(event)">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="custItemTitle">Tùy Chọn Món</h3>
+        <button class="btn-close-modal" onclick="closeCustomizeModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="custModalBody">
+        <!-- Rendered by app.js -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeCustomizeModal()">Hủy</button>
+        <button class="btn btn-primary" id="custSaveBtn">Thêm Vào Giỏ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Đóng ảnh"><i class="fa-solid fa-xmark"></i></button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightboxImage" src="" alt="Menu chi tiết Tiệm Chè Na">
+      <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

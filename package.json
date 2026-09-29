@@ -1,0 +1,13 @@
+{
+  "name": "tiem-che-na",
+  "version": "1.0.0",
+  "description": "Website đặt món online Tiệm Chè Na - Vũ Lăng, Ngũ Hiệp, Thanh Trì",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["tiem-che-na", "nem-nuong", "che-xoai", "an-vat", "thanh-tri"],
+  "author": "Tiệm Chè Na",
+  "license": "ISC"
+}

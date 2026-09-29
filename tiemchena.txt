@@ -1,0 +1,303 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiệm Chè Na - Nem Nướng, Mỳ Trộn & Chè Ngon</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Lexend -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+    <!-- Header / Banner -->
+    <header class="bg-gradient-to-r from-amber-600 to-orange-500 text-white py-8 shadow-md">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-2">Tiệm Chè Na</h1>
+            <p class="text-lg md:text-xl font-light">Thơm ngon chuẩn vị - Vừa miệng từng chi tiết</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Giới thiệu & Chứng nhận -->
+        <section class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-amber-700 mb-4 border-b pb-2">Chứng nhận Vệ sinh & Nguồn gốc thực phẩm</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>Ảnh thực tế túi Nem Nướng Nha Trang đóng gói hút chân không có tem mác.</li>
+                <li>Ảnh thực tế túi Nem Lụi Huế hút chân không sạch sẽ có gia vị và tem nhãn ATTP.</li>
+            </ul>
+        </section>
+
+        <!-- Menu Hình Ảnh Mới Từ Google Drive -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-amber-700 mb-6 text-center">Menu Món Ngon Hấp Dẫn</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                
+                <!-- Hình ảnh 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://drive.google.com/uc?export=download&id=1EOnN5uiKosQyVvAfAgSjLIxsutIYvNFm" alt="Món 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-gray-800">Chè & Đồ uống đặc sắc</h3>
+                        <p class="text-sm text-gray-500 mt-1">Hương vị ngọt ngào, tươi mát.</p>
+                    </div>
+                </div>
+
+                <!-- Hình ảnh 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://drive.google.com/uc?export=download&id=1EOnN5uiKosQyVvAfAgSjLIxsutIYvNFm" alt="Món 2" class="w-full h-48 object-cover">
+                    <div class="p-4"><!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiệm Chè Na - Nem Nướng, Mỳ Trộn & Chè Ngon</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Lexend -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+    <!-- Header / Banner -->
+    <header class="bg-gradient-to-r from-amber-600 to-orange-500 text-white py-8 shadow-md">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-2">Tiệm Chè Na</h1>
+            <p class="text-lg md:text-xl font-light">Thơm ngon chuẩn vị - Vừa miệng từng chi tiết</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Giới thiệu & Chứng nhận -->
+        <section class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-amber-700 mb-4 border-b pb-2">Chứng nhận Vệ sinh & Nguồn gốc thực phẩm</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>Ảnh thực tế túi Nem Nướng Nha Trang đóng gói hút chân không có tem mác.</li>
+                <li>Ảnh thực tế túi Nem Lụi Huế hút chân không sạch sẽ có gia vị và tem nhãn ATTP.</li>
+            </ul>
+        </section>
+
+        <!-- Menu Hình Ảnh Mới Từ Google Drive -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-amber-700 mb-6 text-center">Menu Món Ngon Hấp Dẫn</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                
+                <!-- Hình ảnh 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://drive.google.com/uc?export=download&id=1EOnN5uiKosQyVvAfAgSjLIxsutIYvNFm" alt="Món 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-lg text-gray-800">Chè & Đồ uống đặc sắc</h3>
+                        <p class="text-sm text-gray-500 mt-1">Hương vị ngọt ngào, tươi mát.</p>
+                    </div>
+                </div>
+
+                <!-- Hình ảnh 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://drive.google.com/uc?export=download&id=1EOnN5uiKosQyVvAfAgSjLIxsutIYvNFm" alt="Món 2" class="w-full h-48 object-cover">
+                    <div class="p-4">16584> 2025-09-08 10:54:56> Program: Starting Squirrel Updater: --install .
+16584> 2025-09-08 10:54:56> Program: Starting install, writing to C:\Users\Mr Wrap Auto\AppData\Local\SquirrelTemp
+16584> 2025-09-08 10:54:56> Program: About to install to: C:\Users\Mr Wrap Auto\AppData\Local\Discord
+16584> 2025-09-08 10:54:56> SingleGlobalInstance: Grabbing lockfile with timeout of 00:00:10
+16584> 2025-09-08 10:54:56> CheckForUpdateImpl: Reading RELEASES file from C:\Users\Mr Wrap Auto\AppData\Local\SquirrelTemp
+16584> 2025-09-08 10:54:56> CheckForUpdateImpl: Remote version 1.0.9207 differs from local 
+16584> 2025-09-08 10:54:56> CheckForUpdateImpl: First run or local directory is corrupt, starting from scratch
+16584> 2025-09-08 10:54:56> ApplyReleasesImpl: Writing files to app directory: C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\d3dcompiler_47.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\d3dcompiler_47.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\chrome_100_percent.pak to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\chrome_100_percent.pak
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\chrome_200_percent.pak to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\chrome_200_percent.pak
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\app.ico to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\app.ico
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\Discord.exe to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\Discord.exe.sig to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe.sig
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\discord_wer.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\discord_wer.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\ffmpeg.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\ffmpeg.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\icudtl.dat to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\icudtl.dat
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\installer.db to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\installer.db
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\libEGL.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\libEGL.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\libGLESv2.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\libGLESv2.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\resources.pak to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\resources.pak
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\updater.node to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\updater.node
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\vk_swiftshader.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\vk_swiftshader.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\vulkan-1.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\vulkan-1.dll
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\snapshot_blob.bin to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\snapshot_blob.bin
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\v8_context_snapshot.bin to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\v8_context_snapshot.bin
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\vk_swiftshader_icd.json to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\vk_swiftshader_icd.json
+16584> 2025-09-08 10:54:59> ApplyReleasesImpl: Squirrel Enabled Apps: [C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe]
+16584> 2025-09-08 10:55:00> Utility: Process Started: C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe --squirrel-install 1.0.9207, pid 8416
+16584> 2025-09-08 10:55:01> Utility: Received exitcode 0 from process C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: ran C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe, pid 12476
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: Starting fixPinnedExecutables
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: fixPinnedExecutables: newCurrentFolder: app-1.0.9207
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\LiveCaptions.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\Narrator.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\On-Screen Keyboard.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+16584> 2025-09-08 10:55:01> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\VoiceAccess.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+16584> 2025-09-08 10:55:02> ApplyReleasesImpl: Updating shortcut C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk
+16584> 2025-09-08 10:55:02> ApplyReleasesImpl: Updating shortcut C:\Users\Mr Wrap Auto\Desktop\Discord.lnk
+16584> 2025-09-08 10:55:02> ApplyReleasesImpl: Fixing up tray icons
+16584> 2025-09-08 10:55:02> ApplyReleasesImpl: cleanDeadVersions: for version 1.0.9207
+16584> 2025-09-08 10:55:02> ApplyReleasesImpl: cleanDeadVersions: exclude current version folder app-1.0.9207
+3888> 2025-09-08 10:55:14> Program: Starting Squirrel Updater: --install .
+3888> 2025-09-08 10:55:14> Program: Starting install, writing to C:\Users\Mr Wrap Auto\AppData\Local\SquirrelTemp
+3888> 2025-09-08 10:55:14> Program: About to install to: C:\Users\Mr Wrap Auto\AppData\Local\Discord
+3888> 2025-09-08 10:55:14> Program: Install path C:\Users\Mr Wrap Auto\AppData\Local\Discord already exists, burning it to the ground
+3888> 2025-09-08 10:55:14> SingleGlobalInstance: Grabbing lockfile with timeout of 00:00:10
+3888> 2025-09-08 10:55:14> CheckForUpdateImpl: Reading RELEASES file from C:\Users\Mr Wrap Auto\AppData\Local\SquirrelTemp
+3888> 2025-09-08 10:55:14> CheckForUpdateImpl: Remote version 1.0.9207 differs from local 
+3888> 2025-09-08 10:55:14> CheckForUpdateImpl: First run or local directory is corrupt, starting from scratch
+3888> 2025-09-08 10:55:14> ApplyReleasesImpl: Writing files to app directory: C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\app.ico to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\app.ico
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\chrome_100_percent.pak to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\chrome_100_percent.pak
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\chrome_200_percent.pak to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\chrome_200_percent.pak
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\d3dcompiler_47.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\d3dcompiler_47.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\Discord.exe to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\Discord.exe.sig to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe.sig
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\discord_wer.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\discord_wer.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\ffmpeg.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\ffmpeg.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\icudtl.dat to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\icudtl.dat
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\installer.db to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\installer.db
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\libEGL.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\libEGL.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\snapshot_blob.bin to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\snapshot_blob.bin
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\libGLESv2.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\libGLESv2.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\updater.node to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\updater.node
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\vk_swiftshader.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\vk_swiftshader.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\resources.pak to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\resources.pak
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\vulkan-1.dll to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\vulkan-1.dll
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\vk_swiftshader_icd.json to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\vk_swiftshader_icd.json
+3888> 2025-09-08 10:55:17> ApplyReleasesImpl: Moving file C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\lib\net45\v8_context_snapshot.bin to C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\v8_context_snapshot.bin
+3888> 2025-09-08 10:55:18> ApplyReleasesImpl: Squirrel Enabled Apps: [C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe]
+3888> 2025-09-08 10:55:18> Utility: Process Started: C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe --squirrel-install 1.0.9207, pid 16332
+3888> 2025-09-08 10:55:19> Utility: Received exitcode 0 from process C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: ran C:\Users\Mr Wrap Auto\AppData\Local\Discord\app-1.0.9207\Discord.exe, pid 2884
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: Starting fixPinnedExecutables
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: fixPinnedExecutables: newCurrentFolder: app-1.0.9207
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\LiveCaptions.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\Narrator.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\On-Screen Keyboard.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: File 'C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Accessibility\VoiceAccess.lnk' could not be converted into a valid ShellLink: System.IO.FileNotFoundException: The system cannot find the file specified. (Exception from HRESULT: 0x80070002)
+   at Squirrel.Shell.ShellLink.IShellLinkW.Resolve(IntPtr hWnd, UInt32 fFlags)
+   at Squirrel.Shell.ShellLink.Open(String linkFile, IntPtr hWnd, EShellLinkResolveFlags resolveFlags, UInt16 timeOut)
+   at Squirrel.UpdateManager.ApplyReleasesImpl.<fixPinnedExecutables>b__11_0(FileInfo file)
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: Updating shortcut C:\Users\Mr Wrap Auto\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Discord Inc\Discord.lnk
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: Updating shortcut C:\Users\Mr Wrap Auto\Desktop\Discord.lnk
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: Fixing up tray icons
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: cleanDeadVersions: for version 1.0.9207
+3888> 2025-09-08 10:55:19> ApplyReleasesImpl: cleanDeadVersions: exclude current version folder app-1.0.9207
+13552> 2025-09-08 10:57:02> Program: Starting Squirrel Updater: --install .
+13552> 2025-09-08 10:57:02> Program: Starting install, writing to C:\Users\Mr Wrap Auto\AppData\Local\SquirrelTemp
+13552> 2025-09-08 10:57:02> Program: About to install to: C:\Users\Mr Wrap Auto\AppData\Local\Discord
+13552> 2025-09-08 10:57:02> Program: Install path C:\Users\Mr Wrap Auto\AppData\Local\Discord already exists, burning it to the ground
+13552> 2025-09-08 10:57:02> IEnableLogger: Failed to remove existing directory on full install, is the app still running???: System.IO.IOException: Access to the path 'C:\Users\Mr Wrap Auto\AppData\Local\Discord' is denied.
+   at System.IO.Directory.InternalMove(String sourceDirName, String destDirName, Boolean checkHost)
+   at Squirrel.Utility.<DeleteDirectory>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Squirrel.Utility.<LogIfThrows>d__37.MoveNext()
+13552> 2025-09-08 10:57:02> Unhandled exception: System.AggregateException: One or more errors occurred. ---> System.IO.IOException: Access to the path 'C:\Users\Mr Wrap Auto\AppData\Local\Discord' is denied.
+   at System.IO.Directory.InternalMove(String sourceDirName, String destDirName, Boolean checkHost)
+   at Squirrel.Utility.<DeleteDirectory>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Squirrel.Utility.<LogIfThrows>d__37.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Squirrel.Update.Program.<Install>d__5.MoveNext()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at System.Threading.Tasks.Task.Wait()
+   at Squirrel.Update.Program.executeCommandLine(String[] args)
+   at Squirrel.Update.Program.main(String[] args)
+---> (Inner Exception #0) System.IO.IOException: Access to the path 'C:\Users\Mr Wrap Auto\AppData\Local\Discord' is denied.
+   at System.IO.Directory.InternalMove(String sourceDirName, String destDirName, Boolean checkHost)
+   at Squirrel.Utility.<DeleteDirectory>d__22.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Squirrel.Utility.<LogIfThrows>d__37.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Squirrel.Update.Program.<Install>d__5.MoveNext()<---
+
