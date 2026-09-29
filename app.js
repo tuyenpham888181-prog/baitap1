@@ -931,3 +931,14 @@ function renderRealReviews() {
     `;
   }).join('');
 }
+
+
+window.openAndScrollToReviewForm = function() {
+  const wrapper = document.getElementById("reviewFormWrapper");
+  if (wrapper) {
+    wrapper.classList.remove("hidden");
+    wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+    const nameInput = document.getElementById("reviewName");
+    if (nameInput) setTimeout(() => nameInput.focus(), 400);
+  }
+};
