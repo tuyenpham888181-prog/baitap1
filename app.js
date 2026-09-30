@@ -626,7 +626,7 @@ ${itemsZaloText}
 🎁 Ưu đãi đặt trước (-5%): -${formatMoney(discount)}
 👉 TỔNG THANH TOÁN: ${formatMoney(finalTotal)}
 ---------------------------------------
-💳 MB Bank (Quân Đội) - STK: 83888181 - HỘ KINH DOANH TIỆM CHÈ NA
+💳 MB Bank (Quân Đội) - STK: 836888181 - HỘ KINH DOANH TIỆM CHÈ NA
 (Tiệm Chè Na Vũ Lăng, Ngũ Hiệp • Giao nhanh 30 phút)`;
 
   // Auto copy to clipboard for immediate convenience
@@ -675,7 +675,7 @@ ${itemsZaloText}
   
   const cleanPhone = customerPhone.replace(/\s+/g, '');
   const orderTransferContent = 'TIEMCHENA ' + (cleanPhone ? cleanPhone.slice(-4) : 'ONLINE');
-  const vietQrUrl = `https://img.vietqr.io/image/MB-83888181-compact2.png?amount=${finalTotal}&addInfo=${encodeURIComponent(orderTransferContent)}&accountName=${encodeURIComponent('HO KINH DOANH TIEM CHE NA')}`;
+  const vietQrUrl = `https://img.vietqr.io/image/MB-836888181-compact2.png?amount=${finalTotal}&addInfo=${encodeURIComponent(orderTransferContent)}&accountName=${encodeURIComponent('HO KINH DOANH TIEM CHE NA')}`;
   
   if (qrImg) qrImg.src = vietQrUrl;
   if (qrAmountDisplay) qrAmountDisplay.textContent = formatMoney(finalTotal);
