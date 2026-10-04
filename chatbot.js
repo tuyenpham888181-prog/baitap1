@@ -83,12 +83,12 @@
     },
     {
       id: 'xaocay', keys: ['xao cay', 'chan ga xao', 'mon moi', 'co gi moi', 'banh my tang', 'tang banh my'],
-      reply: '🆕 Món mới nè bác: <b>Chân gà xào cay</b> 🌶️ – chân gà giòn sần sật xào sả ớt, sốt đỏ sánh sệt cay tê!<br>• <b>Size nhỏ 45k</b> – tặng <b>1 ổ bánh mỳ</b> (1 người ăn)<br>• <b>Size to 65k</b> – tặng <b>2 ổ bánh mỳ</b>, vừa cho <b>2 người, cặp đôi hay cả nhà</b><br>Bánh mỳ giòn chấm sốt là vét sạch đĩa luôn ak 🤤',
+      reply: '🆕 Món mới nè bác: <b>Chân gà xào cay</b> 🌶️ – chân gà <b>mềm, thấm đẫm sốt xào</b> sả ớt, cay cay đậm vị!<br>• <b>Size nhỏ 45k</b> – tặng <b>1 ổ bánh mỳ</b> (1 người ăn)<br>• <b>Size to 65k</b> – tặng <b>2 ổ bánh mỳ</b>, vừa cho <b>2 người, cặp đôi hay cả nhà</b><br>Bánh mỳ giòn chấm sốt là vét sạch đĩa luôn ak 🤤',
       buttons: ['zalo', 'menu']
     },
     {
       id: 'changa', keys: ['chan ga', 'chan ga sot thai', 'chan ga rut xuong'],
-      reply: 'Có ak 🍗 Tiệm có 2 kiểu chân gà:<br>• <b>Chân gà sốt Thái xoài cóc</b> – rút xương, chua cay, sả, quất, xoài, cóc. Suất nhỏ <b>35k</b>, suất lớn 55–65k<br>• 🆕 <b>Chân gà xào cay</b> – xào sả ớt sốt sánh: <b>45k tặng 1 ổ bánh mỳ</b> · <b>65k tặng 2 ổ bánh mỳ</b>',
+      reply: 'Có ak 🍗 Tiệm có 2 kiểu chân gà:<br>• <b>Chân gà sốt Thái xoài cóc</b> – rút xương, chua cay, sả, quất, xoài, cóc. Suất nhỏ <b>35k</b>, suất lớn 55–65k<br>• 🆕 <b>Chân gà xào cay</b> – chân gà mềm, thấm sốt xào sả ớt: <b>45k tặng 1 ổ bánh mỳ</b> · <b>65k tặng 2 ổ bánh mỳ</b>',
       buttons: ['buy', 'menu']
     },
     {
