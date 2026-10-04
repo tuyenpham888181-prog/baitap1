@@ -93,17 +93,18 @@
     <div class="container hero-grid">
       <div class="hero-text-content">
         <div class="hero-chip">
-          <i class="fa-solid fa-crown text-accent"></i> Quán Ăn Vặt & Chè Số 1 Ngũ Hiệp
+          <i class="fa-solid fa-fire-flame-curved text-accent"></i> Nóng giòn + Mát lạnh • Chung 1 đơn
         </div>
         <h1 class="hero-heading">
-          ĐẠI TIỆC ĂN VẶT NÓNG HỔI & <span class="highlight-gradient">CHÈ THANH MÁT</span> CHUẨN VỊ!
+          MỘT ĐƠN, ĐỦ NÓNG ĐỦ LẠNH: NEM NƯỚNG GIÒN + <span class="highlight-gradient">CHÈ XOÀI MÁT</span> TỚI TAY VẪN CHUẨN VỊ!
         </h1>
         <p class="hero-desc">
-          Cơn đói chiều tối ập đến? Chẳng cần dắt xe đi đâu xa! <strong>Tiệm Chè Na</strong> chuẩn bị nóng giòn tận chảo, chè thơm béo ngọt thanh và giao tận tay bạn chỉ trong <strong>30 phút</strong>!
+          Thèm mặn lại thèm ngọt? Khỏi đặt 2 quán, khỏi chờ 2 lần ship! <strong>Tiệm Chè Na</strong> làm cả nem nướng than hoa lẫn chè xoài caramen trong cùng 1 bếp. <strong>Đồ nóng hộp riêng, đá túi riêng</strong>, giao quanh Ngũ Hiệp trong <strong>30 phút</strong>, tới nơi nem vẫn giòn, chè vẫn còn đá. Dầu chiên thay mới mỗi ngày, nem có tem ATTP.
         </p>
 
         <!-- Quick Best-Seller Tags -->
         <div class="bestseller-chips">
+          <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-fire"></i> Combo Nem + Chè Xoài: <strong>65k</strong></span>
           <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-fire"></i> Nem Nướng: <strong>35k</strong></span>
           <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-bowl-food"></i> Mỳ Trộn Cay: <strong>35k</strong></span>
           <span class="chip" onclick="filterAndScroll('hot')"><i class="fa-solid fa-drumstick-bite"></i> Chân Gà Thái: <strong>35k</strong></span>
@@ -123,16 +124,16 @@
 
         <!-- Trust Badges -->
         <div class="hero-trust-row">
-          <div class="trust-item"><i class="fa-solid fa-truck-fast"></i> Ship thần tốc 30'</div>
-          <div class="trust-item"><i class="fa-solid fa-percent"></i> Giảm 5% đặt trước</div>
-          <div class="trust-item"><i class="fa-solid fa-shield-heart"></i> 100% Sạch & An Toàn</div>
+          <div class="trust-item"><i class="fa-solid fa-box-open"></i> Nóng – lạnh đóng riêng</div>
+          <div class="trust-item"><i class="fa-solid fa-truck-fast"></i> Ship 30' quanh Ngũ Hiệp</div>
+          <div class="trust-item"><i class="fa-solid fa-star"></i> 500+ đánh giá ShopeeFood</div>
         </div>
       </div>
 
       <!-- Hero Visual Showcase -->
       <div class="hero-visual-card">
         <div class="visual-card-inner">
-          <div class="badge-combo">✨ COMBO SIÊU HOT</div>
+          <div class="badge-combo">✨ COMBO NÓNG – LẠNH 65K</div>
           <img src="images/img_09.jpg" alt="Tiệm Chè Na - Bộ Tứ Món Ăn Vặt Nóng Sốt" class="hero-main-img">
           <div class="hero-floating-card top-left">
             <div class="card-icon"><i class="fa-solid fa-heart"></i></div>
@@ -550,6 +551,72 @@
             <a href="tel:0986479285" class="btn btn-outline-white btn-large">
               <i class="fa-solid fa-phone"></i> GỌI 0986.479.285
             </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waitlist / Customer Survey Form (data → Google Sheets) -->
+  <!-- Tạm ẩn cho tới khi nối Google Form (survey.js) -->
+  <section class="section waitlist-section" id="khach-quen" hidden>
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-heart"></i> DANH SÁCH KHÁCH QUEN</span>
+        <h2 class="section-title">Vào Danh Sách Khách Quen Tiệm Chè Na</h2>
+        <p class="section-subtitle">Mất 30 giây thôi. Tiệm nhắn Zalo báo món mới &amp; ưu đãi riêng cho khách quen trước, không spam nha!</p>
+      </div>
+
+      <div class="waitlist-card">
+        <form id="waitlistForm" class="waitlist-form" novalidate>
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="wlName"><i class="fa-solid fa-user"></i> Tên của bạn <span class="req">*</span></label>
+              <input type="text" id="wlName" name="name" required placeholder="Ví dụ: Chị Hoa, Anh Nam..." class="form-input" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="wlPhone"><i class="fa-solid fa-phone"></i> Số điện thoại / Zalo <span class="req">*</span></label>
+              <input type="tel" id="wlPhone" name="phone" required placeholder="09xx xxx xxx" class="form-input" autocomplete="tel" inputmode="tel">
+            </div>
+          </div>
+
+          <fieldset class="wl-question">
+            <legend>1. Bạn ở khu nào?</legend>
+            <div class="wl-choices" id="wlArea"></div>
+          </fieldset>
+
+          <fieldset class="wl-question">
+            <legend>2. Bạn hay thèm món nào nhất? <small>(chọn nhiều được)</small></legend>
+            <div class="wl-choices" id="wlDishes"></div>
+          </fieldset>
+
+          <fieldset class="wl-question">
+            <legend>3. Bạn hay thèm ăn vặt lúc nào?</legend>
+            <div class="wl-choices" id="wlTime"></div>
+          </fieldset>
+
+          <fieldset class="wl-question">
+            <legend>4. Điều gì làm bạn ngại đặt đồ ăn vặt online nhất?</legend>
+            <div class="wl-choices" id="wlWorry"></div>
+          </fieldset>
+
+          <div class="form-group wl-question">
+            <label for="wlWish">5. Bạn muốn tiệm ra thêm món gì? (không bắt buộc)</label>
+            <textarea id="wlWish" name="wish" rows="2" placeholder="Ví dụ: bánh tráng trộn, chè khúc bạch, combo cho 2 người..." class="form-input"></textarea>
+          </div>
+
+          <p id="wlError" class="wl-error hidden" role="alert"></p>
+
+          <button type="submit" class="btn btn-primary btn-large wl-submit" id="wlSubmitBtn">
+            <i class="fa-solid fa-paper-plane"></i> Vào Danh Sách Khách Quen
+          </button>
+        </form>
+
+        <div id="wlSuccess" class="review-success-alert hidden" role="status">
+          <i class="fa-solid fa-circle-check"></i>
+          <div>
+            <strong>Cảm ơn <span id="wlSuccessName"></span> nha! 🥰</strong>
+            <span>Tiệm đã ghi tên bạn vào danh sách khách quen. Có món mới hay ưu đãi riêng, tiệm nhắn Zalo bạn đầu tiên ak.</span>
           </div>
         </div>
       </div>
@@ -1110,5 +1177,6 @@
 
   <!-- JavaScript Application Logic -->
   <script src="app.js"></script>
+  <script src="survey.js"></script>
 </body>
 </html>
