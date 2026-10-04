@@ -5,16 +5,16 @@
 
 const GOOGLE_FORM = {
   // Link dạng: https://docs.google.com/forms/d/e/XXXXXXXX/formResponse
-  action: '',
+  action: 'https://docs.google.com/forms/d/e/1FAIpQLSeXsEmFnILnVwR54qymdTmn5GOVLa7cSumBJm0kkCf4njx48w/formResponse',
   // Mã entry của từng câu hỏi trong Google Form (dạng 'entry.123456789')
   entries: {
-    name: '',
-    phone: '',
-    area: '',
-    dishes: '',
-    time: '',
-    worry: '',
-    wish: ''
+    name: 'entry.524050234',
+    phone: 'entry.257587026',
+    area: 'entry.718783198',
+    dishes: 'entry.951242940',
+    time: 'entry.231495133',
+    worry: 'entry.446679689',
+    wish: 'entry.1334722451'
   }
 };
 
