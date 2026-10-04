@@ -82,6 +82,11 @@
       buttons: ['order', 'combo']
     },
     {
+      id: 'changa', keys: ['chan ga', 'chan ga sot thai', 'chan ga rut xuong'],
+      reply: 'Có ak 🍗 <b>Chân gà sốt Thái xoài cóc</b> – rút xương giòn sần sật, sốt Thái chua cay, sả, quất, xoài, cóc. Suất nhỏ <b>35k</b>, suất lớn 55–65k. Ăn nhóm hay làm mồi lai rai đều hợp lắm!',
+      buttons: ['buy', 'menu']
+    },
+    {
       id: 'nem', keys: ['nem', 'nem nuong', 'nem lui'],
       reply: '<b>Nem nướng Nha Trang 35k</b> – món số 1 của tiệm 🔥 Nướng than hoa, cuốn bánh tráng, ram giòn, dưa leo, xoài xanh, rau thơm. <b>Sốt thịt băm gia truyền tặng kèm</b>, không tính thêm ak.',
       buttons: ['buy', 'combo']
@@ -107,9 +112,22 @@
       buttons: ['zalo']
     },
     {
-      id: 'thanks', keys: ['cam on', 'thank', 'ok', 'oke', 'duoc roi', 'tuyet'],
-      reply: 'Dạ tiệm cảm ơn bác nhiều 🥰 Cần gì cứ nhắn em nha!',
-      buttons: ['buy', 'form']
+      // Cách chủ tiệm làm thật: khách chê → xin lỗi + hỏi cần khắc phục gì
+      id: 'complain', keys: ['do qua', 'khong ngon', 'chan qua', 'an chan', 'te qua', 'that vong', 'lau qua', 'cham qua', 'sai mon', 'nham mon', 'thieu mon', 'bi thieu', 'giao thieu', 'nguoi ngat', 'phan nan', 'khieu nai', 'khong hai long', 'boc phot', 'kem qua', 'mat ve sinh'],
+      reply: 'Dạ tiệm <b>xin lỗi bác nhiều</b> ak 🙏<br>Bác cho tiệm biết <b>bác muốn tiệm khắc phục thế nào</b> nha – làm lại món, bù món hay góp ý để tiệm sửa.<br>Bác nhắn Zalo <b>0986.479.285</b> để tiệm xử lý trực tiếp cho bác liền ak.',
+      buttons: ['zalo']
+    },
+    {
+      // Cách chủ tiệm làm thật: khách khen → luôn cảm ơn
+      id: 'thanks', keys: ['cam on', 'thank', 'thanks', 'ok', 'oke', 'duoc roi', 'tuyet', 'ngon qua', 'ngon lam', 'ngon that', 'qua ngon', 'hai long', 'thich lam', 'tot qua', 'xuat sac', 'khen'],
+      reply: 'Dạ tiệm <b>cảm ơn bác nhiều lắm</b> ak 🥰 Được bác khen là cả bếp vui cả ngày luôn! Lần sau thèm cứ ghé tiệm nha.',
+      buttons: ['form', 'buy']
+    },
+    {
+      // Câu khách hỏi nhiều nhất ngoài đời: "quán có những món gì?"
+      id: 'menu', keys: ['mon gi', 'nhung mon', 'co gi', 'ban gi', 'co mon', 'dac trung', 'mon chinh'],
+      reply: '📋 Tiệm có 2 nhóm món nè bác:<br>🔥 <b>Ăn vặt nóng</b>: nem nướng, mỳ trộn, mỳ cay 7 cấp độ, chân gà sốt Thái, bánh mì chảo, mẹt đồ chiên<br>❄️ <b>Chè & đồ uống</b>: chè xoài caramen, trà sữa, chè dừa dầm, sữa chua mít, tào phớ, trà chanh<br>⭐ <b>Món đặc trưng của quán</b>: <b>nem nướng Nha Trang 35k</b> (sốt thịt băm gia truyền) + <b>chè xoài caramen 30k</b> – gộp lại combo 65k luôn ak!',
+      buttons: ['menu', 'buy']
     },
     {
       id: 'hello', keys: ['chao', 'hello', 'hi', 'alo', 'xin chao', 'shop oi', 'tiem oi', 'ad oi'],
@@ -119,7 +137,7 @@
   ];
 
   // Ý định cụ thể được xét trước ý định chung
-  const PRIORITY = ['think', 'expensive', 'cold', 'fit', 'buy', 'combo', 'ship', 'clean', 'spicy', 'vacuum', 'best', 'price', 'nem', 'che', 'hours', 'pay', 'where', 'thanks', 'hello'];
+  const PRIORITY = ['complain', 'think', 'expensive', 'cold', 'fit', 'buy', 'combo', 'ship', 'clean', 'spicy', 'vacuum', 'best', 'menu', 'changa', 'price', 'nem', 'che', 'hours', 'pay', 'where', 'thanks', 'hello'];
   INTENTS.sort((a, b) => PRIORITY.indexOf(a.id) - PRIORITY.indexOf(b.id));
 
   const FALLBACK = {
