@@ -2,3 +2,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Du lieu noi bo cho agent/chatbot - KHONG dua len web public
+brain.db
+data/
+sales_script.md
