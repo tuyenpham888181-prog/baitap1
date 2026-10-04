@@ -73,7 +73,7 @@
     },
     {
       id: 'fit', keys: ['phu hop', 'hop voi', 'an nhom', 'an chung', 'may nguoi', '2 nguoi', '3 nguoi', '4 nguoi', '5 nguoi', 'nhieu nguoi', 'ca nha', 'gia dinh', 'tre con', 'tre em', 'em be', 'an nhe', 'an kieng', 'it ngot'],
-      reply: 'Em gợi ý theo nhu cầu nha 👇<br>• <b>Ăn nhóm 2–3 người</b>: mẹt đồ chiên 45k + chè/trà sữa<br>• <b>Ăn nhẹ, không cay</b>: nem nướng, tào phớ caramen 20k, chè dừa dầm 25k<br>• <b>Mê cay</b>: mỳ cay 7 cấp độ, chân gà sốt Thái<br>Chưa chắc món nào hợp thì nhắn Zalo, tiệm tư vấn trực tiếp ak.',
+      reply: 'Em gợi ý theo nhu cầu nha 👇<br>• <b>Ăn nhóm 2–3 người</b>: mẹt đồ chiên 45k + chè/trà sữa<br>• <b>Cặp đôi / cả nhà mê cay</b>: 🆕 chân gà xào cay size to 65k, tặng 2 ổ bánh mỳ<br>• <b>Ăn nhẹ, không cay</b>: nem nướng, tào phớ caramen 20k, chè dừa dầm 25k<br>• <b>Mê cay</b>: mỳ cay 7 cấp độ, chân gà sốt Thái<br>Chưa chắc món nào hợp thì nhắn Zalo, tiệm tư vấn trực tiếp ak.',
       buttons: ['menu', 'zalo']
     },
     {
@@ -82,8 +82,13 @@
       buttons: ['order', 'combo']
     },
     {
+      id: 'xaocay', keys: ['xao cay', 'chan ga xao', 'mon moi', 'co gi moi', 'banh my tang', 'tang banh my'],
+      reply: '🆕 Món mới nè bác: <b>Chân gà xào cay</b> 🌶️ – chân gà giòn sần sật xào sả ớt, sốt đỏ sánh sệt cay tê!<br>• <b>Size nhỏ 45k</b> – tặng <b>1 ổ bánh mỳ</b> (1 người ăn)<br>• <b>Size to 65k</b> – tặng <b>2 ổ bánh mỳ</b>, vừa cho <b>2 người, cặp đôi hay cả nhà</b><br>Bánh mỳ giòn chấm sốt là vét sạch đĩa luôn ak 🤤',
+      buttons: ['zalo', 'menu']
+    },
+    {
       id: 'changa', keys: ['chan ga', 'chan ga sot thai', 'chan ga rut xuong'],
-      reply: 'Có ak 🍗 <b>Chân gà sốt Thái xoài cóc</b> – rút xương giòn sần sật, sốt Thái chua cay, sả, quất, xoài, cóc. Suất nhỏ <b>35k</b>, suất lớn 55–65k. Ăn nhóm hay làm mồi lai rai đều hợp lắm!',
+      reply: 'Có ak 🍗 Tiệm có 2 kiểu chân gà:<br>• <b>Chân gà sốt Thái xoài cóc</b> – rút xương, chua cay, sả, quất, xoài, cóc. Suất nhỏ <b>35k</b>, suất lớn 55–65k<br>• 🆕 <b>Chân gà xào cay</b> – xào sả ớt sốt sánh: <b>45k tặng 1 ổ bánh mỳ</b> · <b>65k tặng 2 ổ bánh mỳ</b>',
       buttons: ['buy', 'menu']
     },
     {
@@ -153,7 +158,7 @@
   ];
 
   // Ý định cụ thể được xét trước ý định chung
-  const PRIORITY = ['late', 'coldcomplain', 'taste', 'complain', 'think', 'expensive', 'cold', 'fit', 'buy', 'combo', 'ship', 'clean', 'spicy', 'vacuum', 'best', 'menu', 'changa', 'price', 'nem', 'che', 'hours', 'pay', 'where', 'thanks', 'hello'];
+  const PRIORITY = ['late', 'coldcomplain', 'taste', 'complain', 'think', 'expensive', 'cold', 'fit', 'buy', 'combo', 'ship', 'clean', 'xaocay', 'spicy', 'vacuum', 'best', 'menu', 'changa', 'price', 'nem', 'che', 'hours', 'pay', 'where', 'thanks', 'hello'];
   INTENTS.sort((a, b) => PRIORITY.indexOf(a.id) - PRIORITY.indexOf(b.id));
 
   const FALLBACK = {
