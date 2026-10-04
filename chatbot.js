@@ -111,10 +111,26 @@
       reply: '📍 Tiệm ở <b>Vũ Lăng, Ngũ Hiệp, Thanh Trì, Hà Nội</b>. Hotline/Zalo <b>0986.479.285</b> – ghé quán hay gọi ship đều được ak.',
       buttons: ['zalo']
     },
+    // ---- 3 lời chê hay gặp nhất (chủ tiệm xác nhận) ----
+    {
+      id: 'late', keys: ['lau qua', 'cham qua', 'giao tre', 'ship tre', 'cho lau', 'doi lau', 'gio chua toi', 'van chua toi', 'chua thay ship', 'chua nhan duoc', 'tre qua', 'mai chua'],
+      reply: 'Dạ tiệm <b>xin lỗi bác đã phải chờ lâu</b> ak 🙏<br>Bác nhắn Zalo <b>tên + số điện thoại đặt đơn</b> để tiệm kiểm tra liền nha. Lỗi do tiệm thì tiệm bù cho bác: <b>giao bù món</b>, <b>tặng món / giảm giá đơn sau</b> hoặc <b>hoàn tiền</b> – bác thấy cách nào ổn cứ nói tiệm ak.',
+      buttons: ['zalo']
+    },
+    {
+      id: 'coldcomplain', keys: ['nguoi roi', 'nguoi het roi', 'nguoi ngat', 'nguoi tanh', 'tan het da', 'tan da roi', 'het da roi', 'iu roi', 'mem het', 'khong con gion', 'loang roi'],
+      reply: 'Dạ tiệm <b>xin lỗi bác</b>, món tới không còn ngon là lỗi của tiệm ak 🙏<br>Bác <b>chụp ảnh gửi Zalo</b> giúp tiệm nha, tiệm xử lý liền: <b>làm lại / giao bù món</b>, <b>tặng món / giảm giá đơn sau</b> hoặc <b>hoàn tiền</b> món bị lỗi.',
+      buttons: ['zalo']
+    },
+    {
+      id: 'taste', keys: ['cay qua', 'qua cay', 'ngot qua', 'qua ngot', 'nhat qua', 'qua nhat', 'man qua', 'qua man', 'it topping', 'it qua', 'khong vua', 'khong hop vi', 'khong hop khau vi', 'beo qua', 'ngay qua'],
+      reply: 'Dạ tiệm xin lỗi bác ak, khẩu vị mỗi người mỗi khác 🙏<br>Bác nói tiệm biết cụ thể (cay quá, ngọt quá, ít topping…) qua Zalo để tiệm <b>bù cho bác</b> và <b>ghi chú khẩu vị riêng của bác</b> – lần sau tiệm làm đúng ý luôn nha.<br>💡 Lần sau đặt, bác ghi "ít cay / ít ngọt" vào ô ghi chú đơn hàng là được ak.',
+      buttons: ['zalo']
+    },
     {
       // Cách chủ tiệm làm thật: khách chê → xin lỗi + hỏi cần khắc phục gì
       id: 'complain', keys: ['do qua', 'khong ngon', 'chan qua', 'an chan', 'te qua', 'that vong', 'lau qua', 'cham qua', 'sai mon', 'nham mon', 'thieu mon', 'bi thieu', 'giao thieu', 'nguoi ngat', 'phan nan', 'khieu nai', 'khong hai long', 'boc phot', 'kem qua', 'mat ve sinh'],
-      reply: 'Dạ tiệm <b>xin lỗi bác nhiều</b> ak 🙏<br>Bác cho tiệm biết <b>bác muốn tiệm khắc phục thế nào</b> nha – làm lại món, bù món hay góp ý để tiệm sửa.<br>Bác nhắn Zalo <b>0986.479.285</b> để tiệm xử lý trực tiếp cho bác liền ak.',
+      reply: 'Dạ tiệm <b>xin lỗi bác nhiều</b> ak 🙏<br>Bác cho tiệm biết <b>bác muốn tiệm khắc phục thế nào</b> nha: <b>làm lại / giao bù món</b>, <b>tặng món / giảm giá đơn sau</b> hoặc <b>hoàn tiền</b>.<br>Bác nhắn Zalo <b>0986.479.285</b> (kèm ảnh nếu có) để tiệm xử lý trực tiếp cho bác liền ak.',
       buttons: ['zalo']
     },
     {
@@ -137,7 +153,7 @@
   ];
 
   // Ý định cụ thể được xét trước ý định chung
-  const PRIORITY = ['complain', 'think', 'expensive', 'cold', 'fit', 'buy', 'combo', 'ship', 'clean', 'spicy', 'vacuum', 'best', 'menu', 'changa', 'price', 'nem', 'che', 'hours', 'pay', 'where', 'thanks', 'hello'];
+  const PRIORITY = ['late', 'coldcomplain', 'taste', 'complain', 'think', 'expensive', 'cold', 'fit', 'buy', 'combo', 'ship', 'clean', 'spicy', 'vacuum', 'best', 'menu', 'changa', 'price', 'nem', 'che', 'hours', 'pay', 'where', 'thanks', 'hello'];
   INTENTS.sort((a, b) => PRIORITY.indexOf(a.id) - PRIORITY.indexOf(b.id));
 
   const FALLBACK = {
@@ -155,8 +171,11 @@
 
   function findIntent(text) {
     const t = norm(text);
+    // Câu hỏi "có ... không?" trước khi mua (vd "có cay quá không") không phải lời chê
+    const isQuestion = / co .* khong (a |ak |vay |nhi |shop |ha )?$/.test(t);
+    const COMPLAINTS = ['late', 'coldcomplain', 'taste', 'complain'];
     // Khớp nguyên từ/cụm từ (có khoảng trắng 2 đầu) để "gia" không dính "giao"
-    return INTENTS.find(it => it.keys.some(k => t.includes(' ' + k + ' '))) || FALLBACK;
+    return INTENTS.find(it => !(isQuestion && COMPLAINTS.includes(it.id)) && it.keys.some(k => t.includes(' ' + k + ' '))) || FALLBACK;
   }
 
   // ---------- Giao diện ----------
