@@ -8,7 +8,7 @@
 
   const BTN = {
     menu: { label: '📋 Xem menu & giá', href: '#menu' },
-    order: { label: '🛒 Chọn món trên web', href: '#menu' },
+    order: { label: '🛒 Đặt món & thanh toán QR', href: 'https://datmon.tiemchena.life', external: true },
     zalo: { label: '💬 Đặt qua Zalo', href: ZALO, external: true },
     form: { label: '💛 Vào danh sách khách quen', href: '#khach-quen' },
     combo: { label: '🎁 Combo & ưu đãi', say: 'Có combo không?' },

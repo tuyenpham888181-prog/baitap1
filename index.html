@@ -564,7 +564,7 @@
       <div class="section-header text-center">
         <span class="section-tag"><i class="fa-solid fa-heart"></i> DANH SÁCH KHÁCH QUEN</span>
         <h2 class="section-title">Vào Danh Sách Khách Quen Tiệm Chè Na</h2>
-        <p class="section-subtitle">Mất 30 giây thôi. Tiệm nhắn Zalo báo món mới &amp; ưu đãi riêng cho khách quen trước, không spam nha!</p>
+        <p class="section-subtitle">Mất 30 giây thôi. Na gửi thư chào ngay, kèm mẹo ăn đồ ship vẫn ngon &amp; ưu đãi riêng cho khách quen. Không spam nha!</p>
       </div>
 
       <div class="waitlist-card">
@@ -578,6 +578,11 @@
               <label for="wlPhone"><i class="fa-solid fa-phone"></i> Số điện thoại / Zalo <span class="req">*</span></label>
               <input type="tel" id="wlPhone" name="phone" required placeholder="09xx xxx xxx" class="form-input" autocomplete="tel" inputmode="tel">
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="wlEmail"><i class="fa-solid fa-envelope"></i> Email nhận thư khách quen <span class="req">*</span></label>
+            <input type="email" id="wlEmail" name="email" required placeholder="tenban@gmail.com" class="form-input" autocomplete="email" inputmode="email" maxlength="100">
           </div>
 
           <fieldset class="wl-question">
@@ -616,7 +621,7 @@
           <i class="fa-solid fa-circle-check"></i>
           <div>
             <strong>Cảm ơn <span id="wlSuccessName"></span> nha! 🥰</strong>
-            <span>Tiệm đã ghi tên bạn vào danh sách khách quen. Có món mới hay ưu đãi riêng, tiệm nhắn Zalo bạn đầu tiên ak.</span>
+            <span>Tiệm đã ghi tên bạn vào danh sách khách quen. <span id="wlSuccessMail">Na vừa gửi thư chào vào email của bạn, không thấy thì xem mục Quảng cáo/Spam giúp Na nha.</span></span>
           </div>
         </div>
       </div>

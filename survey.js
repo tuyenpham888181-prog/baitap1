@@ -1,7 +1,15 @@
 /* =====================================================================
-   FORM DANH SÁCH KHÁCH QUEN - gửi data thẳng về Google Form → Google Sheets
-   Không cần backend. Chỉ cần điền GOOGLE_FORM bên dưới (lấy từ Google Form).
+   FORM DANH SÁCH KHÁCH QUEN – gửi data 2 nơi:
+   1. Google Form → Google Sheets (như cũ)
+   2. CRM của app đặt món (datmon.tiemchena.life/api/waitlist) → hiện trong /admin
+      và tự gửi chuỗi 3 email chăm sóc qua Resend (email có "+test" → nhận cả 3 ngay)
    ===================================================================== */
+
+const CRM_WAITLIST_API = 'https://datmon.tiemchena.life/api/waitlist';
+
+// Giống kiểm tra phía server (app-nextjs/src/lib/orderValidation.ts)
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+const VN_PHONE_RE = /^(03[2-9]|05[25689]|07[06-9]|08[1-9]|09[0-9])\d{7}$/;
 
 const GOOGLE_FORM = {
   // Link dạng: https://docs.google.com/forms/d/e/XXXXXXXX/formResponse
@@ -58,9 +66,12 @@ const SURVEY_OPTIONS = {
 
     const name = form.elements.name.value.trim();
     const phone = form.elements.phone.value.trim();
-    const digits = phone.replace(/\D/g, '');
-    if (!name) return showError('Bạn điền giúp tiệm cái tên nha.');
-    if (digits.length < 9 || digits.length > 11) return showError('Số điện thoại/Zalo chưa đúng, bạn kiểm tra lại giúp tiệm nha.');
+    const cleanPhone = phone.replace(/[\s.-]/g, '');
+    const email = form.elements.email.value.trim().toLowerCase();
+    if (name.length < 2) return showError('Bạn điền giúp tiệm cái tên nha.');
+    if (!VN_PHONE_RE.test(cleanPhone)) return showError('Số điện thoại/Zalo chưa đúng (10 số, ví dụ 0912 345 678), bạn kiểm tra lại giúp tiệm nha.');
+    if (!email) return showError('Bạn điền email để nhận thư khách quen nha.');
+    if (email.length > 100 || !EMAIL_RE.test(email)) return showError('Email chưa đúng (ví dụ: tenban@gmail.com), bạn kiểm tra lại giúp tiệm nha.');
 
     if (!GOOGLE_FORM.action) {
       return showError('Form chưa được nối với Google Sheets. Bạn nhắn Zalo 0986.479.285 giúp tiệm nha!');
@@ -75,11 +86,34 @@ const SURVEY_OPTIONS = {
     form.querySelectorAll('input[name="dishes"]:checked').forEach(el => add('dishes', el.value));
     add('wish', form.elements.wish.value.trim());
 
+    // Ghi chú cho CRM: khu, món hay thèm, giờ thèm, điều ngại, món muốn thêm
+    const picked = sel => Array.from(form.querySelectorAll(sel)).map(el => el.value).join(', ');
+    const note = [
+      ['Khu', picked('input[name="area"]:checked')],
+      ['Thèm', picked('input[name="dishes"]:checked')],
+      ['Lúc', picked('input[name="time"]:checked')],
+      ['Ngại', picked('input[name="worry"]:checked')],
+      ['Muốn thêm', form.elements.wish.value.trim()]
+    ].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join(' | ').slice(0, 500);
+
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
     try {
       // Google Form không trả CORS → dùng no-cors, request vẫn tới và data vẫn vào Sheets
-      await fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body: data });
+      const sheetReq = fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body: data });
+      const crmRes = await fetch(CRM_WAITLIST_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone: cleanPhone, email, note })
+      }).then(r => r.json());
+      await sheetReq.catch(() => {});
+      if (!crmRes.success) return showError(crmRes.error || 'Chưa gửi được, bạn bấm gửi lại giúp tiệm nha.');
+
+      const emails = (crmRes.data && crmRes.data.emails) || {};
+      if (emails.testMode) {
+        document.getElementById('wlSuccessMail').textContent =
+          `Chế độ test (+test): đã gửi ${emails.sent || 0}/3 email ngay vào ${email}.`;
+      }
       form.classList.add('hidden');
       document.getElementById('wlSuccessName').textContent = name;
       successBox.classList.remove('hidden');
