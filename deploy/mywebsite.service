@@ -1,0 +1,22 @@
+[Unit]
+Description=Tiem Che Na website (tiemchena.life)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/my-website
+ExecStart=/usr/bin/node server.js
+Environment=NODE_ENV=production
+Environment=NODE_NO_WARNINGS=1
+Restart=always
+RestartSec=3
+User=www-data
+Group=www-data
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/my-website/data
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,22 @@
+[Unit]
+Description=MCP server my-business (canh tay cua agent Na - goClaw)
+After=network.target docker.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/my-website/mcp
+ExecStart=/usr/bin/node server.mjs
+Environment=NODE_ENV=production
+Environment=NODE_NO_WARNINGS=1
+Restart=always
+RestartSec=3
+User=www-data
+Group=www-data
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/my-website/data
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
