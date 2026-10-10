@@ -109,6 +109,14 @@ const SURVEY_OPTIONS = {
       await sheetReq.catch(() => {});
       if (!crmRes.success) return showError(crmRes.error || 'Chưa gửi được, bạn bấm gửi lại giúp tiệm nha.');
 
+      // Lưu 1 bản vào brain.db trên VPS → agent Na (goClaw) tự nhắn chủ tiệm khi có khách mới
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone: cleanPhone, email, note }),
+        keepalive: true
+      }).catch(() => {});
+
       const emails = (crmRes.data && crmRes.data.emails) || {};
       if (emails.testMode) {
         document.getElementById('wlSuccessMail').textContent =

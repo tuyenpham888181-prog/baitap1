@@ -45,6 +45,10 @@ try {
     db.exec(`CREATE TABLE IF NOT EXISTS drafts (
       id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL,
       channel TEXT, status TEXT NOT NULL DEFAULT 'draft', created_at TEXT NOT NULL)`);
+    // Khách điền form khách quen; notified_at = lúc agent Na đã nhắn chủ tiệm (NULL = chưa nhắn)
+    db.exec(`CREATE TABLE IF NOT EXISTS leads (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, phone TEXT NOT NULL, email TEXT,
+      note TEXT, source TEXT NOT NULL DEFAULT 'form-khach-quen', created_at TEXT NOT NULL, notified_at TEXT)`);
   }
 } catch (e) {
   console.warn('[brain.db] không dùng được (cần Node ≥ 22.5):', e.message);
@@ -70,6 +74,44 @@ function applyHero(html) {
   return html;
 }
 
+// ─── /api/lead – form khách quen lưu vào brain.db ───────────────────────────
+const NAME_RE = /^[\p{L} .'-]{2,60}$/u;
+const VN_PHONE_RE = /^(03[2-9]|05[25689]|07[06-9]|08[1-9]|09[0-9])\d{7}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+const leadHits = new Map(); // chống spam: tối đa 5 lần / 10 phút / IP
+
+function tooManyLeads(ip) {
+  const now = Date.now();
+  const hits = (leadHits.get(ip) || []).filter(t => now - t < 10 * 60 * 1000);
+  hits.push(now);
+  leadHits.set(ip, hits);
+  if (leadHits.size > 5000) leadHits.clear();
+  return hits.length > 5;
+}
+
+function handleLead(req, res) {
+  if (!db) return send(res, 503, JSON.stringify({ ok: false, error: 'db' }), 'application/json');
+  const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+  if (tooManyLeads(ip)) return send(res, 429, JSON.stringify({ ok: false, error: 'Gửi hơi nhanh, đợi vài phút nha' }), 'application/json');
+  let raw = '';
+  req.on('data', c => { raw += c; if (raw.length > 5000) req.destroy(); });
+  req.on('end', () => {
+    let b;
+    try { b = JSON.parse(raw); } catch { return send(res, 400, JSON.stringify({ ok: false, error: 'json' }), 'application/json'); }
+    const name = String(b.name || '').trim().replace(/\s+/g, ' ');
+    const phone = String(b.phone || '').replace(/[\s.-]/g, '');
+    const email = String(b.email || '').trim().toLowerCase();
+    const note = String(b.note || '').trim().slice(0, 500);
+    if (!NAME_RE.test(name) || !VN_PHONE_RE.test(phone) || (email && (email.length > 100 || !EMAIL_RE.test(email)))) {
+      return send(res, 400, JSON.stringify({ ok: false, error: 'Thông tin chưa hợp lệ' }), 'application/json');
+    }
+    const r = db.prepare('INSERT INTO leads (name, phone, email, note, created_at) VALUES (?, ?, ?, ?, ?)')
+      .run(name, phone, email || null, note || null, new Date().toISOString().replace('T', ' ').slice(0, 19));
+    console.log(`[lead] #${r.lastInsertRowid} ${name}`);
+    send(res, 200, JSON.stringify({ ok: true }), 'application/json');
+  });
+}
+
 // ─── /admin ─────────────────────────────────────────────────────────────────
 function checkAdmin(req) {
   const user = process.env.ADMIN_USER || 'admin';
@@ -88,6 +130,9 @@ function renderAdmin() {
   const chip = getSetting('hero-chip');
   const updated = db ? db.prepare("SELECT updated_at FROM site_settings WHERE key = 'hero-title'").get() : null;
   const drafts = db ? db.prepare('SELECT * FROM drafts ORDER BY id DESC LIMIT 30').all() : [];
+  const leads = db ? db.prepare('SELECT * FROM leads ORDER BY id DESC LIMIT 30').all() : [];
+  const leadRows = leads.map(l => `<tr><td>#${l.id}</td><td><b>${escapeHtml(l.name)}</b><div class="c">${escapeHtml(l.phone)}${l.email ? ' · ' + escapeHtml(l.email) : ''}${l.note ? '<br>' + escapeHtml(l.note) : ''}</div></td>
+    <td>${escapeHtml(l.created_at)}</td><td>${l.notified_at ? '✅ ' + escapeHtml(l.notified_at) : '⏳ chưa'}</td></tr>`).join('');
   const rows = drafts.map(d => `
     <tr><td>#${d.id}</td><td><b>${escapeHtml(d.title)}</b><div class="c">${escapeHtml(d.content).replace(/\n/g, '<br>')}</div></td>
     <td>${escapeHtml(d.channel || '-')}</td><td>${escapeHtml(d.status)}</td><td>${escapeHtml(d.created_at)}</td></tr>`).join('');
@@ -105,6 +150,9 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{border-bottom:1px
 ${chip ? `<p>Dòng nhỏ phía trên: <b>${escapeHtml(chip)}</b></p>` : ''}
 <p class="muted">${updated ? 'Cập nhật lúc ' + escapeHtml(updated.updated_at) + ' (UTC) – qua AI agent Na / MCP' : ''}</p>
 <p><a href="/" target="_blank">Mở trang chủ →</a></p></div>
+<div class="box"><h2>Khách mới điền form (${leads.length})</h2>
+${leads.length ? `<table><tr><th>#</th><th>Khách</th><th>Lúc (UTC)</th><th>Na đã nhắn</th></tr>${leadRows}</table>` : '<p class="muted">Chưa có khách nào.</p>'}
+</div>
 <div class="box"><h2>Bản nháp bài đăng (${drafts.length})</h2>
 ${drafts.length ? `<table><tr><th>#</th><th>Nội dung</th><th>Kênh</th><th>Trạng thái</th><th>Tạo lúc (UTC)</th></tr>${rows}</table>` : '<p class="muted">Chưa có bản nháp nào.</p>'}
 </div>
@@ -124,6 +172,7 @@ const server = http.createServer((req, res) => {
   try { urlPath = decodeURIComponent(req.url.split('?')[0]); } catch { urlPath = req.url.split('?')[0]; }
 
   if (urlPath === '/healthz') return send(res, 200, JSON.stringify({ ok: true, db: !!db }), 'application/json');
+  if (urlPath === '/api/lead' && req.method === 'POST') return handleLead(req, res);
 
   if (urlPath === '/admin' || urlPath === '/admin/') {
     if (!process.env.ADMIN_PASSWORD) return send(res, 503, 'Admin chưa được cấu hình (thiếu ADMIN_PASSWORD).', 'text/plain; charset=utf-8');

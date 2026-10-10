@@ -38,7 +38,18 @@ db.exec(`CREATE TABLE IF NOT EXISTS drafts (
   id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, content TEXT NOT NULL,
   channel TEXT, status TEXT NOT NULL DEFAULT 'draft', created_at TEXT NOT NULL)`);
 
+db.exec(`CREATE TABLE IF NOT EXISTS leads (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, phone TEXT NOT NULL, email TEXT,
+  note TEXT, source TEXT NOT NULL DEFAULT 'form-khach-quen', created_at TEXT NOT NULL, notified_at TEXT)`);
+
 const now = () => new Date().toISOString().replace('T', ' ').slice(0, 19);
+// created_at lưu theo UTC → hiển thị giờ Việt Nam (UTC+7)
+const vnTime = utc => new Date(utc.replace(' ', 'T') + 'Z').toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+// Mốc 0h hôm nay theo giờ Việt Nam, đổi về UTC để so với created_at
+const vnTodayStartUtc = () => {
+  const vn = new Date(Date.now() + 7 * 3600e3);
+  return new Date(Date.UTC(vn.getUTCFullYear(), vn.getUTCMonth(), vn.getUTCDate()) - 7 * 3600e3).toISOString().replace('T', ' ').slice(0, 19);
+};
 const log = (tool, msg) => console.log(`[${new Date().toISOString()}] ${tool}: ${msg}`);
 const ok = text => ({ content: [{ type: 'text', text }] });
 const fail = text => ({ content: [{ type: 'text', text: 'LỖI: ' + text }], isError: true });
@@ -105,6 +116,46 @@ function buildServer() {
     log('list_drafts', `${rows.length} bản`);
     if (!rows.length) return ok('Chưa có bản nháp nào.');
     return ok(rows.map(d => `#${d.id} [${d.status}] ${d.title} (${d.channel || '-'}, ${d.created_at} UTC)\n${d.content.slice(0, 300)}${d.content.length > 300 ? '…' : ''}`).join('\n\n'));
+  });
+
+  server.registerTool('get_new_leads', {
+    title: 'Khách mới điền form (chưa báo)',
+    description: 'Lấy các khách MỚI điền form khách quen trên tiemchena.life mà chủ tiệm CHƯA được báo, rồi đánh dấu là đã báo (không trả lại lần sau). Dùng trong mỗi lần heartbeat để chủ động nhắn chủ tiệm. Nếu kết quả là "Không có khách mới" thì không cần nhắn gì.',
+    inputSchema: {}
+  }, async () => {
+    const rows = db.prepare('SELECT * FROM leads WHERE notified_at IS NULL ORDER BY id').all();
+    const today = db.prepare('SELECT COUNT(*) AS n FROM leads WHERE created_at >= ?').get(vnTodayStartUtc()).n;
+    if (!rows.length) {
+      log('get_new_leads', 'không có khách mới');
+      return ok(`Không có khách mới. (Hôm nay có ${today} khách điền form.)`);
+    }
+    const mark = db.prepare('UPDATE leads SET notified_at = ? WHERE id = ?');
+    for (const r of rows) mark.run(now(), r.id);
+    log('get_new_leads', `${rows.length} khách mới: ${rows.map(r => '#' + r.id).join(', ')}`);
+    return ok(`Có ${rows.length} khách mới (hôm nay tổng ${today} khách):\n\n` + rows.map(r =>
+      `• ${r.name} – SĐT ${r.phone}${r.email ? ' – ' + r.email : ''} – lúc ${vnTime(r.created_at)}${r.note ? '\n  ' + r.note : ''}`).join('\n'));
+  });
+
+  server.registerTool('leads_summary', {
+    title: 'Tổng kết khách & bản nháp',
+    description: 'Tổng kết số khách điền form khách quen, bản nháp bài đăng và tiêu đề trang chủ trong N giờ qua (mặc định 24h). Dùng cho báo cáo buổi sáng. Lưu ý: đơn hàng & doanh thu nằm ở app đặt món datmon, tool này không đọc được.',
+    inputSchema: { hours: z.number().int().min(1).max(168).optional().describe('Số giờ nhìn lại, mặc định 24') }
+  }, async ({ hours }) => {
+    const h = hours || 24;
+    const since = new Date(Date.now() - h * 3600e3).toISOString().replace('T', ' ').slice(0, 19);
+    const leads = db.prepare('SELECT name, phone, created_at FROM leads WHERE created_at >= ? ORDER BY id').all(since);
+    const drafts = db.prepare('SELECT id, title FROM drafts WHERE created_at >= ? ORDER BY id').all(since);
+    const hero = db.prepare("SELECT value FROM site_settings WHERE key = 'hero-title'").get();
+    const total = db.prepare('SELECT COUNT(*) AS n FROM leads').get().n;
+    log('leads_summary', `${h}h: ${leads.length} khách, ${drafts.length} nháp`);
+    return ok([
+      `Trong ${h} giờ qua:`,
+      `- Khách mới điền form: ${leads.length}${leads.length ? ' → ' + leads.map(l => `${l.name} (${l.phone}, ${vnTime(l.created_at)})`).join('; ') : ''}`,
+      `- Tổng khách trong sổ từ trước tới nay: ${total}`,
+      `- Bản nháp bài mới: ${drafts.length}${drafts.length ? ' → ' + drafts.map(d => `#${d.id} ${d.title}`).join('; ') : ''}`,
+      `- Tiêu đề trang chủ đang chạy: ${hero ? '"' + hero.value + '"' : 'mặc định'}`,
+      `(Đơn hàng & doanh thu xem ở https://datmon.tiemchena.life/admin)`
+    ].join('\n'));
   });
 
   server.registerTool('get_shop_info', {
